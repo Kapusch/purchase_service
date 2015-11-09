@@ -1,0 +1,183 @@
+﻿@Author : Jean-Emmanuel Baillat - 25/01/2015
+
+// -- INTRODUCTION AU TUTORIEL --
+//Cet article est volontairement peu détaillé car il faut le considérer comme un aide-mémoire.
+//Si jamais vous vouliez avoir plus de renseignements, voici des liens utiles :
+http://openclassrooms.com/courses/gerez-vos-codes-source-avec-git
+http://christopheducamp.com/2013/12/15/github-pour-nuls-partie-1/
+http://www.kitpages.fr/fr/cms/59/aide-memoire-git
+
+
+// --------------------------------------------
+
+
+// -- INITIALISATION DE GIT --
+//Ouvrir la console Git Bash et référrez-vous aux commandes suivantes :
+
+//Activer la couleur dans Git :
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+
+//Configurer son nom et mail :
+git config --global user.name "Ton nom"
+git config --global user.email "ton-nom@hotmail.com"
+
+//Configurer le mode d'envoi des données au serveur :
+git config --global push.default simple
+
+//Naviguer dans le répertoire où l'on veut travailler :
+cd D:
+cd Travaux_UBP
+cd M1_INFO
+mkdir Projet_ENT
+cd Projet_ENT
+
+//Cloner le répository de la forge :
+git clone https://forge.clermont-universite.fr/git/general
+
+//On vous demande les logs de la forge (les même que l'ENT) :
+//Username for 'https://forge.clermont-universite.fr/git/general' : monlogin
+//Password for 'https://forge.clermont-universite.fr/git/general' : monpwd
+
+//Une copie du répository de la forge a été créée dans votre répertoire
+cd general
+
+
+// --------------------------------------------
+
+
+// -- MODIFICATION D'UN FICHIER DU REPOSITORY --
+//Pour voir quels fichiers ont été modifiés (commande expliquée un peu plus loin):
+git status
+
+//Pour voir quelles ont été les modifications apportées sur TOUS les fichiers :
+git diff
+
+//Sur UN fichier précis :
+git diff mondossier/monfichier.txt
+
+
+// --------------------------------------------
+
+
+// -- VALIDER LES MODIFICATIONS --
+//Pour voir le status de votre répository :
+git status
+
+//Soit votre dossier est à jour, soit il ne l'est pas.
+//Dans ce cas, il vous liste les fichiers dans deux catégories :
+//Les fichiers prêts à être commit (en vert)
+//Les fichiers non préparés pour être commit (en rouge)
+
+//Pour ajouter un fichier à la liste de ceux prêts à commités (un fichier modifié ou bien un fichier/dossier récemment créé) :
+git add mon-fichier.txt
+git add mon-nouveau-dossier
+
+//Pour commiter tous les fichiers de la liste de ceux prêts à être commités :
+git commit -m "Le message personnalisé de la modification"
+
+//Pour commiter tous les fichiers listés par la commande "git status" en une fois :
+git commit -a
+
+
+// --------------------------------------------
+
+
+// -- REVENIR SUR UNE MODIFICATION --
+//Pour voir l'historique des commits effectués :
+git log
+
+//Pour voir le détails des lignes qui ont été modifiées à chaque commit :
+git log -p
+
+//Pour voir un résumé des modifications pour chaque commit :
+git log --stat
+
+//Pour modifier son dernier message de commit (très récent):
+git commit --amend
+
+//Pour annuler le dernier commit sans annuler les modifications des fichiers :
+git reset HEAD^
+
+//Pour annuler un commit précis sans annuler les modifications des fichiers, en précisant donc le numéro du commit précis :
+git reset d6d98923868578a7f38dea79833b56d0326fcba1
+
+//Pour annuler le dernier commit ET annuler les modifications apportées :
+git reset --hard HEAD^
+
+//Si vous avez modifié plusieurs fichiers mais que vous n’avez pas encore envoyé le commit et que vous voulez restaurer un fichier tel qu’il était au dernier commit :
+git checkout nom-du-fichier
+
+//Pour retirer un fichier de la liste de ceux prêts à être commités :
+git reset HEAD -- fichier_a_supprimer_de_la_liste
+
+
+// --------------------------------------------
+
+// -- METTRE A JOUR LES REPOSITORY --
+//Pour récupérer le nouveau contenu du repository distant (comprendre les nouveautés par rapport à votre repository local) :
+git pull
+
+//Si deux personnes modifient en même temps deux endroits distincts d’un même fichier, les changements sont intelligemment fusionnés par Git.
+//Parfois, mais cela arrive normalement rarement, deux personnes modifient la
+//même zone de code en même temps. Dans ce cas, Git dit qu’il y a un conflit
+//car il ne peut décider quelle modification doit être conservée ; il vous
+//indique alors le nom des fichiers en conflit. Ouvrez-les avec un éditeur et
+//recherchez une ligne contenant « <<<<<<<<< ». Ces symboles délimitent vos
+//changements et ceux des autres personnes. Supprimez ces symboles et gardez
+//uniquement les changements nécessaires, puis faites un nouveau commit pour enregistrer tout cela.
+
+//Pour envoyer les modifications de votre repository local (comprendre vos commits), seulement après s'être assuré de ne pas envoyer n'importe quoi !
+git push
+
+//Personne ne doit avoir fait un push avant vous depuis votre dernier pull.
+//Pour éviter cela, vérifier bien que votre répository local est à jour avec un pull.
+
+//Pour annuler un malheureux commit déjà publié sur le repository distant :
+git revert d6d98923868578a7f38dea79833b56d0326fcba1
+
+//Il faudra alors faire un push du nouveau commit pour qu'il soit affecté au repository distant.
+
+
+// --------------------------------------------
+
+// -- TRAVAILLER AVEC LES BRANCHES --
+//Cette partie est compliquée à expliquer et il vaut mieux la comprendre avec ce cours :
+//http://openclassrooms.com/courses/gerez-vos-codes-source-avec-git
+//Descendez voir la partie "Travailler avec des branches", vous en retiendrez facilement le principe.
+
+//Pour voir toutes les branches du repository :
+git branch
+
+//Pour créer une nouvelle branche :
+git branch nom-de-ma-branche
+
+//Pour naviguer dans une branche :
+git checkout nom-de-ma-branche
+
+//Pour fusionner une branche avec la branche principale (master) :
+git merge
+
+//Pour supprimer une branche :
+git branch -d nom-de-ma-branche
+
+//Pour supprimer une branche même sans avoir fusionné son contenu :
+git branch -D nom-de-ma-branche
+
+
+// --------------------------------------------
+
+
+// -- COMMANDES UTILITAIRES DANS VIM --
+//Une fois que votre fichier est ouvert dans VIM :
+//Pour taper du texte dans votre fichier, il faut préalablement utiliser la touche A de votre clavier
+//Pour taper du texte dans la console de VIM, il faut préalablement utiliser la touche ESCAPE de votre clavier
+
+//Une fois dans la console VIM,
+//Pour quitter VIM après avoir sauvegardé le fichier :
+:wq
+//Pour sauvegarder son fichier sans quitter VIM :
+:w
+//Pour quitter VIM :
+:q
