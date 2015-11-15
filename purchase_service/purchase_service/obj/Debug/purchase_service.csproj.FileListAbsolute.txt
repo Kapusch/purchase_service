@@ -1,5 +1,4 @@
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\bin\purchase_service.pdb
-D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.csprojResolveAssemblyReference.cache
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb

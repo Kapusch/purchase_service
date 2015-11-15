@@ -14,13 +14,33 @@ namespace purchase_service
     [System.ComponentModel.ToolboxItem(false)]
     // Pour autoriser l'appel de ce service Web depuis un script à l'aide d'ASP.NET AJAX, supprimez les marques de commentaire de la ligne suivante. 
     // [System.Web.Script.Services.ScriptService]
+
     public class WebService : System.Web.Services.WebService
     {
 
-        [WebMethod]
+        [WebMethod(Description="Says \"Hello\" to the world.")]
         public string HelloWorld()
         {
             return "Hello World";
+        }
+
+        [WebMethod(Description="Returns the sum of two integers.")]
+        public int Addition(int a, int b)
+        {
+            return a + b;
+        }
+
+        [WebMethod(Description = "Enables to add or withdraw money on a customer account.")]
+        public string BankWire(string numAccount, int amount, string movement)
+        {
+            if (movement.Equals("Debit"))
+            {
+                return amount+"€ have been debited from account n° "+numAccount;
+            }
+            else
+            {
+                return amount + "€ have been credited on account n° " + numAccount;
+            }
         }
     }
 }
