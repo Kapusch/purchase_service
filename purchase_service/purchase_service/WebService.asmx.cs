@@ -1,4 +1,6 @@
-﻿using System;
+﻿using purchase_service.BO;
+using purchase_service.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,6 +43,18 @@ namespace purchase_service
             {
                 return amount + "€ have been credited on account n° " + numAccount;
             }
+        }
+
+        [WebMethod(Description = "test")]
+        public string test(int id)
+        {
+            string result=string.Empty;
+
+            TypeCarte carte = TypeCarteDAO.Read(id);
+
+            if (carte != null)
+                result = carte.CardName;
+            return result;
         }
     }
 }

@@ -63,6 +63,21 @@
     <Content Include="WebService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDD\BDDConnexion.cs" />
+    <Compile Include="BO\Administrateur.cs" />
+    <Compile Include="BO\Banque.cs" />
+    <Compile Include="BO\CarteBancaire.cs" />
+    <Compile Include="BO\Client.cs" />
+    <Compile Include="BO\ClientCarteBancaire.cs" />
+    <Compile Include="BO\Historique.cs" />
+    <Compile Include="BO\TypeCarte.cs" />
+    <Compile Include="DAO\AdministrateurDAO.cs" />
+    <Compile Include="DAO\BanqueDAO.cs" />
+    <Compile Include="DAO\CarteBancaireDAO.cs" />
+    <Compile Include="DAO\ClientCarteBancaireDAO.cs" />
+    <Compile Include="DAO\ClientDAO.cs" />
+    <Compile Include="DAO\HistoriqueDAO.cs" />
+    <Compile Include="DAO\TypeCarteDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
@@ -77,6 +92,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

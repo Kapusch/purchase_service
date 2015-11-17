@@ -2,3 +2,9 @@ D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purch
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_app\bin\purchase_app.pdb
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.dll
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.pdb
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\bin\purchase_app.dll.config
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\bin\purchase_app.dll
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\bin\purchase_app.pdb
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.csprojResolveAssemblyReference.cache
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.dll
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.pdb

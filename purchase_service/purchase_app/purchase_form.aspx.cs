@@ -17,7 +17,8 @@ namespace purchase_app
         protected void submitBtn_Click(object sender, EventArgs e)
         {
             purchase_service.WebServiceSoapClient client = new purchase_service.WebServiceSoapClient();
-            resultLbl.Text = client.BankWire(numCompte.Text, Convert.ToInt32(amount.Text), choiceOperation.SelectedItem.Text);
+            //resultLbl.Text = client.BankWire(numCompte.Text, Convert.ToInt32(amount.Text), choiceOperation.SelectedItem.Text);
+            //resultLbl.Text = client.test(Convert.ToInt32(amount.Text)); à finir de tester
         }
     }
 }
