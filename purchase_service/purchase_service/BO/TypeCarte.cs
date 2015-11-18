@@ -32,5 +32,16 @@ namespace purchase_service.BO
         }
 
         #endregion
+
+        public bool Update()
+        {
+            if (!(string.IsNullOrEmpty(this.CardName) || this.CardTypeId == null))
+            {
+                purchase_service.DAO.TypeCarteDAO.Update(this);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

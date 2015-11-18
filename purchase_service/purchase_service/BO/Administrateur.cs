@@ -42,8 +42,28 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public Administrateur() { }
+        public Administrateur(int id, string login, string passwordA, string nomA, string firstname, DateTime inscripDate) 
+        {
+            administratorId = id;
+            administratorLogin = login;
+            password = passwordA;
+            name = nomA;
+            firstName = firstname;
+            inscriptionDate = inscripDate;
+        }
 
         #endregion
+
+        public bool Update()
+        {
+            if (!(this.administratorId == null || string.IsNullOrEmpty(this.AdministratorLogin) || string.IsNullOrEmpty(this.Password) ||
+                string.IsNullOrEmpty(this.Name) || string.IsNullOrEmpty(this.FirstName)))
+            {
+                purchase_service.DAO.AdministrateurDAO.Update(this);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

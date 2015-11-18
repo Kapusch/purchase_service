@@ -15,7 +15,7 @@ namespace purchase_service.BO
 
         private DateTime experationDate;
 
-        private int pyctogramme;
+        private int cryctogramme;
 
         private TypeCarte typeCard;
 
@@ -31,7 +31,7 @@ namespace purchase_service.BO
 
         public DateTime ExperationDate { get { return experationDate; } }
 
-        public int Pyctogramme { get { return pyctogramme; } }
+        public int Cryctogramme { get { return cryctogramme; } }
 
         public TypeCarte TypeCard { get { return typeCard; } }
 
@@ -41,8 +41,18 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public CarteBancaire() { }
+        public CarteBancaire(int id, int numero, DateTime dateExpi, int pycto, TypeCarte type, Banque hisBank) 
+        {
+            bankCardId = id;
+            number = numero;
+            experationDate = dateExpi;
+            cryctogramme = pycto;
+            typeCard = type;
+            banque = hisBank;
+        }
 
         #endregion
+
+        
     }
 }

@@ -52,6 +52,8 @@ namespace purchase_service
 
             TypeCarte carte = TypeCarteDAO.Read(id);
 
+            BDDConnexion.CloseConnection(); // à ne pas oublier pour fermer la connexion une fois l'accès a la BDD fini !
+
             if (carte != null)
                 result = carte.CardName;
             return result;

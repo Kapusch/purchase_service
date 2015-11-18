@@ -25,8 +25,24 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public Banque() { }
+        public Banque(int id ,string nom) 
+        {
+            bankId = id;
+            bankName = nom;
+        }
 
         #endregion
+
+        public bool Update()
+        {
+            if(!(this.bankId==null || string.IsNullOrEmpty(this.BankName)))
+            {
+                purchase_service.DAO.BanqueDAO.Update(this);
+                return true;
+            }
+            else
+                return false;
+                
+        }
     }
 }

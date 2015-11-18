@@ -7,7 +7,7 @@ namespace purchase_service.BO
 {
     public class Client
     {
-        #region attributs 
+        #region attributs
 
         private int clientId;
 
@@ -41,14 +41,39 @@ namespace purchase_service.BO
 
         public DateTime InscriptionDate { get { return inscriptionDate; } }
 
+        public int Sold { get { return sold; } }
+
         public bool IsDelete { get { return isDelete; } set { isDelete = value; } }
 
         #endregion
 
         #region constructeur
 
-        public Client() { }
+        public Client(int id, string login, string passwordC, string nameClient, string firstname
+                        , DateTime inscripDate, int soldC, bool isDeleteC)
+        {
+            clientId = id;
+            clientLogin = login;
+            password = passwordC;
+            name = nameClient;
+            firstName = firstname;
+            inscriptionDate = inscripDate;
+            sold = soldC;
+            isDelete = isDeleteC;
+        }
 
         #endregion
+
+        public bool Update()
+        {
+            if (!(this.ClientId == null || string.IsNullOrEmpty(this.ClientLogin) || string.IsNullOrEmpty(this.FirstName) || string.IsNullOrEmpty(this.Name)
+                || string.IsNullOrEmpty(this.Password) || this.Sold == null || this.IsDelete == null))
+            {
+                purchase_service.DAO.ClientDAO.Update(this);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

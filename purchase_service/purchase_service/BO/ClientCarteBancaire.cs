@@ -17,15 +17,19 @@ namespace purchase_service.BO
 
         #region get set
 
-        public Client ClientId { get { return client; } set { client = value; } }
+        public Client Client { get { return client; } set { client = value; } }
 
-        public CarteBancaire BankCardIs { get { return bankCard; } set { bankCard = value; } }
+        public CarteBancaire BankCard { get { return bankCard; } set { bankCard = value; } }
 
         #endregion
 
         #region constructeur
 
-        public ClientCarteBancaire() { }
+        public ClientCarteBancaire(Client cli, CarteBancaire bankcard) 
+        {
+            client = cli;
+            bankCard = bankcard;
+        }
 
         #endregion
     }
