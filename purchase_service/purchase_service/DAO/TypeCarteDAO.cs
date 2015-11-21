@@ -40,7 +40,7 @@ namespace purchase_service.DAO
 
                 while (reader.Read())
                 {
-                    TypeCarte currentTypeCard = new TypeCarte((int)reader["ID_TYPE_CARTE"], (string)reader["NOM"]);
+                    TypeCarte currentTypeCard = new TypeCarte(Convert.ToInt32(reader["ID_TYPE_CARTE"]), reader["NOM"].ToString());
                     result.Add(currentTypeCard);
                 }
             }
@@ -49,6 +49,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
 
+            reader.Close();
             return result;
         }
 
@@ -82,8 +83,9 @@ namespace purchase_service.DAO
             int id = 0;
             while (reader.Read())
             {
-                id = (int)reader["ID"];
+                id = Convert.ToInt32(reader["ID"]);
             }
+            reader.Close();
             return id;
         }
 

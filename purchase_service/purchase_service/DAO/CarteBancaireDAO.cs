@@ -39,9 +39,9 @@ namespace purchase_service.DAO
 
                 while (reader.Read())
                 {
-                    CarteBancaire currentBankCard = new CarteBancaire((int)reader["ID_CARTE_BANCAIRE"], (int)reader["NUMERO"]
-                        ,DateTime.Parse((string)reader["DATE_EXPIRATION"]),(int)reader["CRYPTOGRAMME"]
-                        ,TypeCarteDAO.Read((int)reader["ID_TYPE_CARTE"]), BanqueDAO.Read((int)reader["ID_BANQUE"]));
+                    CarteBancaire currentBankCard = new CarteBancaire(Convert.ToInt32(reader["ID_CARTE_BANCAIRE"]), Convert.ToInt32(reader["NUMERO"])
+                        ,DateTime.Parse(reader["DATE_EXPIRATION"].ToString()),Convert.ToInt32(reader["CRYPTOGRAMME"])
+                        ,TypeCarteDAO.Read(Convert.ToInt32(reader["ID_TYPE_CARTE"])), BanqueDAO.Read(Convert.ToInt32(reader["ID_BANQUE"])));
                     result.Add(currentBankCard);
                 }
             }
@@ -50,6 +50,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
 
+            reader.Close();
             return result;
         }
 
@@ -63,8 +64,10 @@ namespace purchase_service.DAO
             int id = 0;
             while (reader.Read())
             {
-                id = (int)reader["ID"];
+                id = Convert.ToInt32(reader["ID"]);
             }
+
+            reader.Close();
             return id;
         }
 

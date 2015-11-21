@@ -39,8 +39,8 @@ namespace purchase_service.DAO
 
                 while (reader.Read())
                 {
-                    Administrateur currentAdministrateur = new Administrateur((int)reader["ID_ADMINISTRATEUR"],(string)reader["LOGIN_ADMINISTRATEUR"]
-                        ,(string)reader["PASSWORD"], (string)reader["NOM"], (string)reader["PRENOM"], DateTime.Parse((string)reader["DATE_INSCRIPTION"]));
+                    Administrateur currentAdministrateur = new Administrateur(Convert.ToInt32(reader["ID_ADMINISTRATEUR"]),reader["LOGIN_ADMINISTRATEUR"].ToString()
+                        ,reader["PASSWORD"].ToString(), reader["NOM"].ToString(), reader["PRENOM"].ToString(), DateTime.Parse(reader["DATE_INSCRIPTION"].ToString()));
                     result.Add(currentAdministrateur);
                 }
             }
@@ -49,6 +49,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
 
+            reader.Close();
             return result;
         }
 
@@ -79,8 +80,10 @@ namespace purchase_service.DAO
             int id=0;
             while (reader.Read())
             {
-                id = (int)reader["ID"];
+                id = Convert.ToInt32(reader["ID"]);
             }
+
+            reader.Close();
             return id;
         }
 

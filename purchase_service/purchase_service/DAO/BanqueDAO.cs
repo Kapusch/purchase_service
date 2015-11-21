@@ -39,7 +39,7 @@ namespace purchase_service.DAO
 
                 while (reader.Read())
                 {
-                    Banque currentBanque = new Banque((int)reader["ID_BANQUE"], (string)reader["NOM"]);
+                    Banque currentBanque = new Banque(Convert.ToInt32(reader["ID_BANQUE"]), reader["NOM"].ToString());
                     result.Add(currentBanque);
                 }
             }
@@ -48,6 +48,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
 
+            reader.Close();
             return result;
         }
 
@@ -77,8 +78,10 @@ namespace purchase_service.DAO
             int id = 0;
             while (reader.Read())
             {
-                id = (int)reader["ID"];
+                id = Convert.ToInt32(reader["ID"]);
             }
+
+            reader.Close();
             return id;
         }
 

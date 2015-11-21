@@ -31,7 +31,7 @@ namespace purchase_service.DAO
                 while (reader.Read())
                 {
                     ClientCarteBancaire currentClientCarteBancaire = new ClientCarteBancaire(
-                        ClientDAO.Read((int)reader["ID_CLIENT"]), CarteBancaireDAO.Read((int)reader["ID_CARTE_BANCAIRE"]));
+                        ClientDAO.Read(Convert.ToInt32(reader["ID_CLIENT"])), CarteBancaireDAO.Read(Convert.ToInt32(reader["ID_CARTE_BANCAIRE"])));
                     result.Add(currentClientCarteBancaire);
                 }
             }
@@ -40,6 +40,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
 
+            reader.Close();
             return result;
         }
 

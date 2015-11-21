@@ -31,9 +31,9 @@ namespace purchase_service.DAO
                 while (reader.Read())
                 {
 
-                    Historique currentHistorique = new Historique(ClientDAO.Read((int)reader["ID_CLIENT"])
-                        , (int)reader["MONTANT_TRANSACTION"], (int)reader["SOLDE_APRES_TRANSACTION"]
-                        , DateTime.Parse((string)reader["DATE_TRANSACTION"]));
+                    Historique currentHistorique = new Historique(ClientDAO.Read(Convert.ToInt32(reader["ID_CLIENT"]))
+                        , Convert.ToInt32(reader["MONTANT_TRANSACTION"]), Convert.ToInt32(reader["SOLDE_APRES_TRANSACTION"])
+                        , DateTime.Parse(reader["DATE_TRANSACTION"].ToString()));
                     result.Add(currentHistorique);
                 }
             }
@@ -41,7 +41,8 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
-
+            
+            reader.Close();
             return result;
         }
 

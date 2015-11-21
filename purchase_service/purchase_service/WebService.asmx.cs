@@ -19,44 +19,27 @@ namespace purchase_service
 
     public class WebService : System.Web.Services.WebService
     {
-
-        [WebMethod(Description="Says \"Hello\" to the world.")]
-        public string HelloWorld()
+        [WebMethod(Description = "Add a new card type into the DB.")]
+        public string AddTypeCarte(string name)
         {
-            return "Hello World";
+            TypeCarte newType = new TypeCarte(0, name);
+            TypeCarteDAO.Insert(newType);
+
+
+            BDDConnexion.CloseConnection();
+            return "The card type "+name+" was well inserted into the DB.";
         }
 
-        [WebMethod(Description="Returns the sum of two integers.")]
-        public int Addition(int a, int b)
+        [WebMethod(Description = "Update the name of a card type into the DB.")]
+        public string UpdateTypeCarte(string oldName, string newName)
         {
-            return a + b;
-        }
+            int idType = TypeCarteDAO.Search("NOM = '"+oldName+"'")[0].CardTypeId;
+            TypeCarte newType = new TypeCarte(idType, newName);
+            TypeCarteDAO.Update(newType);
 
-        [WebMethod(Description = "Enables to add or withdraw money on a customer account.")]
-        public string BankWire(string numAccount, int amount, string movement)
-        {
-            if (movement.Equals("Debit"))
-            {
-                return amount+"€ have been debited from account n° "+numAccount;
-            }
-            else
-            {
-                return amount + "€ have been credited on account n° " + numAccount;
-            }
-        }
 
-        [WebMethod(Description = "test")]
-        public string test(int id)
-        {
-            string result=string.Empty;
-
-            TypeCarte carte = TypeCarteDAO.Read(id);
-
-            BDDConnexion.CloseConnection(); // à ne pas oublier pour fermer la connexion une fois l'accès a la BDD fini !
-
-            if (carte != null)
-                result = carte.CardName;
-            return result;
+            BDDConnexion.CloseConnection();
+            return "The card type " + oldName + " has successfully changed to : "+newName;
         }
     }
 }
