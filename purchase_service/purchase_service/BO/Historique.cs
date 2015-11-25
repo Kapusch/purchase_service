@@ -27,18 +27,25 @@ namespace purchase_service.BO
 
         public int SoldAfterTransaction { get { return soldAfterTransaction; } set { soldAfterTransaction = value; } }
 
-        public DateTime TransactionDate { get { return transactionDate; } set { transactionDate = value; } }
+        public DateTime TransactionDate { get { return transactionDate; } }
 
         #endregion
 
         #region constructeur
 
-        public Historique(Client cli, int sum, int newSold) 
+        public Historique(Client cli, int sum, int newSold)
         {
             client = cli;
             transactionSum = sum;
+            soldAfterTransaction = newSold;
+        }
+
+        public Historique(Client cli, int sum, int newSold, DateTime transacDate) 
+        {
+            client = cli;
             transactionSum = sum;
             soldAfterTransaction = newSold;
+            transactionDate = transacDate;
         }
 
         #endregion

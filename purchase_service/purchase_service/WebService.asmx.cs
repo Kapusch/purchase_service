@@ -23,9 +23,9 @@ namespace purchase_service
         public string NewTypeCarte(int idAdmin, string nameCard)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("ID_ADMINISTRATEUR = '" + idAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB==null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
@@ -38,7 +38,7 @@ namespace purchase_service
                 }
                 else
                 {
-                    TypeCarte newType = new TypeCarte(0, nameCard);
+                    TypeCarte newType = new TypeCarte(nameCard);
                     TypeCarteDAO.Insert(newType);
                     msg = "Le type de carte " + nameCard + " a été ajouté dans la base.";
                 }
@@ -68,8 +68,8 @@ namespace purchase_service
                 }
                 else
                 {
-                    TypeCarte newType = new TypeCarte(typeCarteDB[0].CardTypeId, newName);
-                    TypeCarteDAO.Update(newType);
+                    typeCarteDB.FirstOrDefault().CardName=newName;
+                    TypeCarteDAO.Update(typeCarteDB.FirstOrDefault());
                     msg = "Le type de carte " + oldName + " a été modifié en : "+newName;
                 }
             }
@@ -194,6 +194,104 @@ namespace purchase_service
                 }
             }
 
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+
+        [WebMethod(Description = "do purchase")]
+        public string PurchaseProducts(int idClient, int purchasePrice)
+        {
+            if (purchasePrice < 0)
+                return "error prix inferieur à 0";
+            Client currentClient = ClientDAO.Search("ID_Client='" + idClient + "'").FirstOrDefault();
+            if (currentClient == null)
+                return "Le client n'existe pas";
+            if (currentClient.Sold < purchasePrice)
+                return "Le client ne possède pas assez d'argent";
+
+            currentClient.DoPurchase(purchasePrice);
+            ClientDAO.Update(currentClient);
+            Historique currentHistorique = new Historique(currentClient, purchasePrice, currentClient.Sold);
+            HistoriqueDAO.Insert(currentHistorique);
+            BDDConnexion.CloseConnection();
+            return "l'achat a réussi";
+        }
+
+        [WebMethod(Description = "identified client")]
+        public string PersonIdentification(string login, string pwd)
+        {
+            List<Client> currentClient = ClientDAO.Search("LOGIN_CLIENT='" + login + "' and PASSWORD='" + pwd + "'");
+            List<Administrateur> currentAdministrateur = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR='" + login + "' and PASSWORD='" + pwd + "'");
+            if (currentClient == null)
+                if (currentAdministrateur == null)
+                    return "Le profil renseigné n'existe pas";
+
+            if (currentClient.Count > 1 || currentAdministrateur.Count > 1 || (currentClient.Any() && currentAdministrateur.Any()))
+                return "Le profil renseigné possède plusieurs correspondances";
+
+
+            BDDConnexion.CloseConnection();
+            if (currentClient.Any())
+                return currentClient.FirstOrDefault().ClientId.ToString();
+            else
+                return currentAdministrateur.FirstOrDefault().AdministratorId.ToString();
+        }
+
+        [WebMethod(Description = "Add a new bank into DB.")]
+        public string NewBank(int idAdmin, string bank)
+        {
+            String msg = "";
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
+
+            if (adminDB == null)
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+            else
+            {
+                List<Banque> bankDB = BanqueDAO.Search("NOM = '" + bank + "'");
+                if (bankDB.Any())
+                {
+                    msg = "Action impossible. Le type de carte " + bank + " est déjà présent dans la base.";
+                }
+                else
+                {
+                    Banque newBank = new Banque(bank);
+                    BanqueDAO.Insert(newBank);
+                    msg = "Le type de carte " + bank + " a été ajouté dans la base.";
+                }
+            }
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+
+
+        [WebMethod(Description = "Update the name of a bank in the DB.")]
+        public string UpdateBank(int idAdmin, string oldName, string newName)
+        {
+            String msg = "";
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
+
+            if (adminDB == null)
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+            else
+            {
+                List<Banque> banqueDB = BanqueDAO.Search("NOM = '" + oldName + "'");
+                if (!banqueDB.Any())
+                {
+                    msg = "Action impossible. Le type de carte " + oldName + " n'est pas présent dans la base.";
+                }
+                else
+                {
+                    banqueDB.FirstOrDefault().BankName = newName;
+                    BanqueDAO.Update(banqueDB.FirstOrDefault());
+                    msg = "Le type de carte " + oldName + " a été modifié en : " + newName;
+                }
+            }
 
             BDDConnexion.CloseConnection();
             return msg;

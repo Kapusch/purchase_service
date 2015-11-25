@@ -25,10 +25,15 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public Banque(int id ,string nom) 
+        public Banque(string name)
+        {
+            bankName = name;
+        }
+
+        public Banque(int id, string name) 
         {
             bankId = id;
-            bankName = nom;
+            bankName = name;
         }
 
         #endregion

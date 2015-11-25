@@ -25,6 +25,11 @@ namespace purchase_service.BO
 
         #region constructeur
 
+        public TypeCarte(string name)
+        {
+            cardName = name;
+        }
+
         public TypeCarte(int id, string name) 
         {
             cardTypeId = id;

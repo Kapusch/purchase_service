@@ -75,5 +75,15 @@ namespace purchase_service.BO
             else
                 return false;
         }
+
+        public void DoPurchase (int price)
+        {
+            this.sold = this.sold - price;
+        }
+
+        public void DoCredit(int amount)
+        {
+            this.sold = this.sold + amount;
+        }
     }
 }
