@@ -33,13 +33,12 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public Historique(Client cli, int sum, int newSold,DateTime transacDate) 
+        public Historique(Client cli, int sum, int newSold) 
         {
             client = cli;
             transactionSum = sum;
             transactionSum = sum;
             soldAfterTransaction = newSold;
-            transactionDate = transacDate;
         }
 
         #endregion

@@ -20,10 +20,10 @@ namespace purchase_service
     public class WebService : System.Web.Services.WebService
     {
         [WebMethod(Description = "Add a new card type into the DB.")]
-        public string NewTypeCarte(string loginAdmin, string pwdAdmin, string nameCard)
+        public string NewTypeCarte(int idAdmin, string nameCard)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            List<Administrateur> adminDB = AdministrateurDAO.Search("ID_ADMINISTRATEUR = '" + idAdmin + "'");
 
             if (!adminDB.Any())
             {
@@ -50,12 +50,12 @@ namespace purchase_service
 
 
         [WebMethod(Description = "Update the name of a card type into the DB.")]
-        public string UpdateTypeCarte(string loginAdmin, string pwdAdmin, string oldName, string newName)
+        public string UpdateTypeCarte(int idAdmin, string oldName, string newName)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB==null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
@@ -122,19 +122,20 @@ namespace purchase_service
 
 
         [WebMethod(Description = "Delete a client account.")]
-        public string DeleteAccount(string loginAdmin, string pwdAdmin, string loginClient)
+        public string DeleteAccount(int idAdmin, int idClient)
         {
             String msg = "";
-            List<Client> clientDB = ClientDAO.Search("LOGIN_CLIENT = '" + loginClient + "' AND IS_DELETE = '0'");
+            List<Client> clientDB = ClientDAO.Search("ID_CLIENT = '" + idClient + "' AND IS_DELETE = '0'");
             if (clientDB.Any())
             {
                 Client newClient = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, clientDB[0].Sold, true);
                 ClientDAO.Insert(newClient);
-                msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être supprimé par l'administrateur: "+loginAdmin;
+                msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être supprimé par l'administrateur: "+ 
+                    AdministrateurDAO.Read(idAdmin).Name;
             }
             else
             {
-                msg = "Le compte associé au login "+loginClient+" n'existe pas en base ou bien a déjà été supprimé par un administrateur.";
+                msg = "Le compte associé au login n'existe pas en base ou bien a déjà été supprimé par un administrateur.";
             }
 
             BDDConnexion.CloseConnection();
@@ -147,6 +148,7 @@ namespace purchase_service
         {
             String msg = "";
             Client clientUp;
+            Historique newHistorique;
             List<Client> clientDB = ClientDAO.Search("LOGIN_CLIENT = '"+login+"' AND PASSWORD = '"+pwdClient+"' AND IS_DELETE = '0'");
             if (!clientDB.Any())
             {
@@ -159,7 +161,9 @@ namespace purchase_service
                     if ((clientDB[0].Sold - amount) >= 0)
                     {
                         clientUp = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, (clientDB[0].Sold - amount), clientDB[0].IsDelete);
+                        newHistorique = new Historique(clientUp, amount, clientUp.Sold);
                         ClientDAO.Update(clientUp);
+                        HistoriqueDAO.Insert(newHistorique);
                         msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold - amount) + "€";
                     }
                     else
@@ -173,7 +177,9 @@ namespace purchase_service
                     if (rand.Next(0, 101) > 49)
                     {
                         clientUp = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, (clientDB[0].Sold + amount), clientDB[0].IsDelete);
+                        newHistorique = new Historique(clientUp, amount, clientUp.Sold);
                         ClientDAO.Update(clientUp);
+                        HistoriqueDAO.Insert(newHistorique);
                         msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être crédité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold + amount) + "€";
                     }
                     else

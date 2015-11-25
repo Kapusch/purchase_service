@@ -13,7 +13,7 @@ namespace purchase_service.DAO
         public static Administrateur Read(int id)
         {
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = string.Format("select * from ADMINISTRATEUR where ID_BANQUE={0}", id.ToString());
+            cmd.CommandText = string.Format("select * from ADMINISTRATEUR where ID_ADMIN={0}", id.ToString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             return ExecuteReader(cmd).FirstOrDefault();
