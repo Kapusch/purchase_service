@@ -130,8 +130,7 @@ namespace purchase_service
             {
                 Client newClient = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, clientDB[0].Sold, true);
                 ClientDAO.Insert(newClient);
-                msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être supprimé par l'administrateur: "+ 
-                    AdministrateurDAO.Read(idAdmin).Name;
+                msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être supprimé par l'administrateur: "+ AdministrateurDAO.Read(idAdmin).Name;
             }
             else
             {
@@ -142,55 +141,61 @@ namespace purchase_service
             return msg;
         }
 
-
-        [WebMethod(Description = "Enables to debit or to credit his own client account.")]
-        public string NewTransaction(string login, string pwdClient, string action, int amount)
+        [WebMethod(Description = "Enables to debit his own client account.")]
+        public string DebitTransaction(int idClient, int amount)
         {
             String msg = "";
-            Client clientUp;
             Historique newHistorique;
-            List<Client> clientDB = ClientDAO.Search("LOGIN_CLIENT = '"+login+"' AND PASSWORD = '"+pwdClient+"' AND IS_DELETE = '0'");
-            if (!clientDB.Any())
+            Client clientDB = ClientDAO.Read(idClient);
+            if (clientDB == null || clientDB.IsDelete)
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects ou bien le compte a été supprimé.";
+            }else
+            {
+                if ((clientDB.Sold - amount) >= 0)
+                {
+                    clientDB.DoPurchase(amount);
+                    newHistorique = new Historique(clientDB, amount, clientDB.Sold);
+                    ClientDAO.Update(clientDB);
+                    HistoriqueDAO.Insert(newHistorique);
+                    msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB.Sold - amount) + "€";
+                }
+                else
+                {
+                    msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " ne peut pas être débité du montant suivant : " + amount + "€. Pensez à réapprovisionner votre compte (solde actuel: " + clientDB.Sold + "€).";
+                }
+            }
+
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+
+
+        [WebMethod(Description = "Enables to credit his own client account.")]
+        public string CreditTransaction(int idClient, int amount)
+        {
+            String msg = "";
+            Historique newHistorique;
+            Client clientDB = ClientDAO.Read(idClient);
+            if (clientDB == null || clientDB.IsDelete)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects ou bien le compte a été supprimé.";
             }
             else
             {
-                if (action.Equals("debit"))
+                Random rand = new Random();
+                if (rand.Next(0, 101) > 49)
                 {
-                    if ((clientDB[0].Sold - amount) >= 0)
-                    {
-                        clientUp = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, (clientDB[0].Sold - amount), clientDB[0].IsDelete);
-                        newHistorique = new Historique(clientUp, amount, clientUp.Sold);
-                        ClientDAO.Update(clientUp);
-                        HistoriqueDAO.Insert(newHistorique);
-                        msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold - amount) + "€";
-                    }
-                    else
-                    {
-                        msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " ne peut pas être débité du montant suivant : " + amount + "€. Pensez à réapprovisionner votre compte (solde actuel: " + clientDB[0].Sold + "€).";
-                    }
-                }
-                else if (action.Equals("credit"))
-                {
-                    Random rand = new Random();
-                    if (rand.Next(0, 101) > 49)
-                    {
-                        clientUp = new Client(clientDB[0].ClientId, clientDB[0].ClientLogin, clientDB[0].Password, clientDB[0].Name, clientDB[0].FirstName, clientDB[0].InscriptionDate, (clientDB[0].Sold + amount), clientDB[0].IsDelete);
-                        newHistorique = new Historique(clientUp, amount, clientUp.Sold);
-                        ClientDAO.Update(clientUp);
-                        HistoriqueDAO.Insert(newHistorique);
-                        msg = "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être crédité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold + amount) + "€";
-                    }
-                    else
-                    {
-                        msg = "Transfert refusé par la banque. Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " ne peut pas être crédité du montant suivant : " + amount + "€.";
-                    }
-
+                    clientDB.DoCredit(amount);
+                    newHistorique = new Historique(clientDB, amount, clientDB.Sold);
+                    ClientDAO.Update(clientDB);
+                    HistoriqueDAO.Insert(newHistorique);
+                    msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " vient d'être crédité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB.Sold + amount) + "€";
                 }
                 else
                 {
-                    msg = "Action non-reconnue. Assurez-vous d'avoir bien saisi une des actions suivantes : 'debit' ou 'credit'";
+                    msg = "Transfert refusé par la banque. Le compte de " + clientDB.Name + " " + clientDB.FirstName + " ne peut pas être crédité du montant suivant : " + amount + "€.";
                 }
             }
 
