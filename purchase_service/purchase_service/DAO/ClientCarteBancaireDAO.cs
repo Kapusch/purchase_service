@@ -61,5 +61,25 @@ namespace purchase_service.DAO
                 throw (e);
             }
         }
+        /**********************************************************************/
+        public static void Delete(int id)
+        {
+            SqlCommand cmd = new SqlCommand();
+            const string query = "Delete from CLIENT_CARTE_BANCAIRE where ID_CARTE_BANCAIRE = @paramSup";
+            cmd.Parameters.AddWithValue("@paramSup", id);
+            cmd.CommandText = string.Format(query);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = BDDConnexion.Conn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+        }
+        /**********************************************************************/
+   
     }
 }

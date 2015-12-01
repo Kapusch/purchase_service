@@ -47,7 +47,147 @@ namespace purchase_service
             BDDConnexion.CloseConnection();
             return msg;
         }
+        /****************************************************************************************************************/
+        [WebMethod(Description = "Lier une carte bancaire à un client dans la base de données!")]
+        public String AddLinkClientCarte(string loginAdmin, string pwdAdmin, Client idclient, CarteBancaire idcartebancaire)
+        {
+            String msg = "";
+            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
 
+            if (!adminDB.Any())
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+
+            else
+            {
+                List<Client> ClientDB = ClientDAO.Search("ID_CLIENT = '" + idclient + "'");
+                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                if (!ClientDB.Any() || !CarteBancaireDB.Any())
+                {
+                    msg = "Action impossible. Le numéro de client " + idclient + " ou le numéro de la carte bancaire " + idcartebancaire + " n'existe pas dans la base.";
+                }
+                else
+                {
+                    List<ClientCarteBancaire> ClientCarteBancaireDB = ClientCarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                    if (ClientCarteBancaireDB.Any())
+                    {
+                        msg = "Action impossible. Ce numéro de la carte bancaire " + idcartebancaire + " est déjà lier à un client.";
+                    }
+                    else
+                    {
+                        ClientCarteBancaire newType = new ClientCarteBancaire(idclient, idcartebancaire);
+                        ClientCarteBancaireDAO.Insert(newType);
+                        msg = "L'affectation de la carte " + idcartebancaire + " au client " + idclient + " a été ajouté dans la base.";
+                    }
+                }
+            }
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+        /****************************************************************************************************************************/
+        /************************************************************************************************************************/
+
+        [WebMethod(Description = "Ajouter une carte bancaire")]
+        public String AddCarte(string loginAdmin, string pwdAdmin, int id, int numero, DateTime dateExpi, int pycto, TypeCarte type, Banque hisBank)
+        {
+            String msg = "";
+            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+
+            if (!adminDB.Any())
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+
+            else
+            {
+                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
+                //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                if (CarteBancaireDB.Any())
+                {
+                    msg = +id + " existe dans la base.";
+                }
+                else
+                {
+                    CarteBancaire newType = new CarteBancaire(id, numero, dateExpi, pycto, type, hisBank);
+                    CarteBancaireDAO.Insert(newType);
+                    msg = "La carteBancaire  " + id + " a été ajouté dans la base.";
+                }
+
+            }
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+        /****************************************************************************************************************************/
+        /************************************************************************************************************************/
+
+        [WebMethod(Description = "Supprimer une carte bancaire")]
+        public String DeleteCarteBancaire(string loginAdmin, string pwdAdmin, int id)
+        {
+            String msg = "";
+            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+
+            if (!adminDB.Any())
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+
+            else
+            {
+                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
+                //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                if (!CarteBancaireDB.Any())
+                {
+                    msg = +id + " n'existe pas dans la base.";
+                }
+                else
+                {
+                    CarteBancaireDAO.Delete(id);
+                    msg = "La carteBancaire  " + id + " a été supprimé dans la base.";
+                }
+
+            }
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+        /****************************************************************************************************************************/
+        /************************************************************************************************************************/
+
+        [WebMethod(Description = "Suprimer une carte à un Client")]
+        public String DeleteClientCarteBancaire(string loginAdmin, string pwdAdmin, int id)
+        {
+            String msg = "";
+            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+
+            if (!adminDB.Any())
+            {
+                msg = "Authentification impossible: les identifiants sont incorrects.";
+            }
+
+            else
+            {
+                List<ClientCarteBancaire> ClientCarteBancaireDB = ClientCarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
+                //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                if (!ClientCarteBancaireDB.Any())
+                {
+                    msg = +id + " n'existe pas dans la base.";
+                }
+                else
+                {
+                    // CarteBancaire newType;= new CarteBancaire(id);
+                    ClientCarteBancaireDAO.Delete(id);
+                    msg = "La carte de Client  " + id + " a été supprimé dans la base.";
+                }
+
+            }
+
+            BDDConnexion.CloseConnection();
+            return msg;
+        }
+        /****************************************************************************************************************************/
 
         [WebMethod(Description = "Update the name of a card type into the DB.")]
         public string UpdateTypeCarte(int idAdmin, string oldName, string newName)
