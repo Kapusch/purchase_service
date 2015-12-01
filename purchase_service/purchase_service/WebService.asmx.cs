@@ -49,12 +49,12 @@ namespace purchase_service
         }
         /****************************************************************************************************************/
         [WebMethod(Description = "Lier une carte bancaire à un client dans la base de données!")]
-        public String AddLinkClientCarte(string loginAdmin, string pwdAdmin, Client idclient, CarteBancaire idcartebancaire)
+        public String AddLinkClientCarte(int idAdmin, int idclient, int idcartebancaire)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB == null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
@@ -76,7 +76,7 @@ namespace purchase_service
                     }
                     else
                     {
-                        ClientCarteBancaire newType = new ClientCarteBancaire(idclient, idcartebancaire);
+                        ClientCarteBancaire newType = new ClientCarteBancaire(ClientDB.FirstOrDefault(), CarteBancaireDB.FirstOrDefault());
                         ClientCarteBancaireDAO.Insert(newType);
                         msg = "L'affectation de la carte " + idcartebancaire + " au client " + idclient + " a été ajouté dans la base.";
                     }
@@ -90,29 +90,38 @@ namespace purchase_service
         /************************************************************************************************************************/
 
         [WebMethod(Description = "Ajouter une carte bancaire")]
-        public String AddCarte(string loginAdmin, string pwdAdmin, int id, int numero, DateTime dateExpi, int pycto, TypeCarte type, Banque hisBank)
+        public String AddCarte(int idAdmin, int numero, string dateExpi, int pycto, int type, int hisBank)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB == null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
 
             else
             {
-                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
+                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("NUMERO = '" + numero + "'");
                 //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
                 if (CarteBancaireDB.Any())
                 {
-                    msg = +id + " existe dans la base.";
+                    msg = numero + " existe dans la base.";
                 }
                 else
                 {
-                    CarteBancaire newType = new CarteBancaire(id, numero, dateExpi, pycto, type, hisBank);
-                    CarteBancaireDAO.Insert(newType);
-                    msg = "La carteBancaire  " + id + " a été ajouté dans la base.";
+                    Banque BanqueDB = BanqueDAO.Read(hisBank);
+                    TypeCarte TypeCarteDB = TypeCarteDAO.Read(type);
+                    if (BanqueDB != null && TypeCarteDB != null)
+                    {
+                        CarteBancaire newType = new CarteBancaire(0, numero, System.DateTime.Parse(dateExpi), pycto, TypeCarteDB, BanqueDB);
+                        CarteBancaireDAO.Insert(newType);
+                        msg = "La carteBancaire  " + numero + " a été ajouté dans la base.";
+                    }
+                    else
+                    {
+                        msg = "Banque introuvable ou type de carte inexistant.";
+                    }
                 }
 
             }
@@ -124,28 +133,27 @@ namespace purchase_service
         /************************************************************************************************************************/
 
         [WebMethod(Description = "Supprimer une carte bancaire")]
-        public String DeleteCarteBancaire(string loginAdmin, string pwdAdmin, int id)
+        public String DeleteCarteBancaire(int idAdmin, int idCarte)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB == null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
 
             else
             {
-                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
-                //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idCarte + "'");
                 if (!CarteBancaireDB.Any())
                 {
-                    msg = +id + " n'existe pas dans la base.";
+                    msg = +idCarte + " n'existe pas dans la base.";
                 }
                 else
                 {
-                    CarteBancaireDAO.Delete(id);
-                    msg = "La carteBancaire  " + id + " a été supprimé dans la base.";
+                    CarteBancaireDAO.Delete(idCarte);
+                    msg = "La carteBancaire  " + idCarte + " a été supprimé dans la base.";
                 }
 
             }
@@ -157,29 +165,28 @@ namespace purchase_service
         /************************************************************************************************************************/
 
         [WebMethod(Description = "Suprimer une carte à un Client")]
-        public String DeleteClientCarteBancaire(string loginAdmin, string pwdAdmin, int id)
+        public String DeleteClientCarteBancaire(int idAdmin, int idCarte)
         {
             String msg = "";
-            List<Administrateur> adminDB = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR = '" + loginAdmin + "'");
+            Administrateur adminDB = AdministrateurDAO.Read(idAdmin);
 
-            if (!adminDB.Any())
+            if (adminDB == null)
             {
                 msg = "Authentification impossible: les identifiants sont incorrects.";
             }
 
             else
             {
-                List<ClientCarteBancaire> ClientCarteBancaireDB = ClientCarteBancaireDAO.Search("ID_Cartebancaire = '" + id + "'");
-                //List<CarteBancaire> CarteBancaireDB = CarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idcartebancaire + "'");
+                List<ClientCarteBancaire> ClientCarteBancaireDB = ClientCarteBancaireDAO.Search("ID_CARTE_BANCAIRE = '" + idCarte + "'");
                 if (!ClientCarteBancaireDB.Any())
                 {
-                    msg = +id + " n'existe pas dans la base.";
+                    msg = +idCarte + " n'existe pas dans la base.";
                 }
                 else
                 {
                     // CarteBancaire newType;= new CarteBancaire(id);
-                    ClientCarteBancaireDAO.Delete(id);
-                    msg = "La carte de Client  " + id + " a été supprimé dans la base.";
+                    ClientCarteBancaireDAO.Delete(idCarte);
+                    msg = "La carte de Client  " + idCarte + " a été supprimé dans la base.";
                 }
 
             }

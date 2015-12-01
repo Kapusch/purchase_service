@@ -74,9 +74,9 @@ namespace purchase_service.DAO
         public static void Insert(CarteBancaire carteBancaire)
         {
             SqlCommand cmd = new SqlCommand();
-            const string query = "INSERT INTO CLIENT VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')";
+            const string query = "INSERT INTO CARTE_BANCAIRE VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')";
             cmd.CommandText = string.Format(query, GenerateId().ToString(), carteBancaire.Number, carteBancaire.ExperationDate.ToShortDateString()
-                ,carteBancaire.Cryctogramme.ToString(), carteBancaire.TypeCard.CardTypeId, carteBancaire.Banque.BankId);
+                ,carteBancaire.Cryctogramme, carteBancaire.TypeCard.CardTypeId, carteBancaire.Banque.BankId);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             try

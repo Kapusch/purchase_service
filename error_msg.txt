@@ -1,0 +1,17 @@
+"Authentification impossible: les identifiants sont incorrects."
+"Action impossible. Le type de carte " + nameCard + " est déjà présent dans la base."
+"Le type de carte " + nameCard + " a été ajouté dans la base."
+"Action impossible. Le type de carte " + oldName + " n'est pas présent dans la base.";
+"Le type de carte " + oldName + " a été modifié en : "+newName
+"Le compte de " + nameClient + " " + firstNameClient + " vient d'être ouvert avec un solde initial de " + soldClient + " €. L'identifiant associé est: " + login
+"Création du compte impossible: le login " + login + " est déjà utilisé pour un compte existant déjà en base."
+"Le compte de " + nameAdmin + " " + firstNameAdmin + " vient d'être ouvert avec tous les droits d'aministration. L'identifiant associé est: " + login;
+"Création du compte administrateur impossible: le login " + login + " est déjà utilisé pour un compte existant déjà en base.";
+"Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être supprimé par l'administrateur: " + AdministrateurDAO.Read(idAdmin).Name;
+"Le compte associé au login n'existe pas en base ou bien a déjà été supprimé par un administrateur.";
+"Authentification impossible: les identifiants sont incorrects ou bien le compte a été supprimé.";
+ "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold - amount) + "€";
+ "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " ne peut pas être débité du montant suivant : " + amount + "€. Pensez à réapprovisionner votre compte (solde actuel: " + clientDB[0].Sold + "€).";
+ "Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " vient d'être crédité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB[0].Sold + amount) + "€";
+ "Transfert refusé par la banque. Le compte de " + clientDB[0].Name + " " + clientDB[0].FirstName + " ne peut pas être crédité du montant suivant : " + amount + "€.";
+ 
