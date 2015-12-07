@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="NewTypeCarte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameCard" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewTypeCarteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewTypeCarteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCarteForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="numero" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateExpi" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="crypto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="typeCarte" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hisBank" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCarteForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddCarteForClientResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteCarteBancaireForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idCarte" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteCarteBancaireForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteCarteBancaireForClientResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTypeCarte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTypeCarteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateTypeCarteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwdClient" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameClient" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstNameClient" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="soldClient" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewAdmin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwdAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstNameAdmin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewAdminResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewAdminResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DebitTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DebitTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DebitTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreditTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseProducts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="purchasePrice" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PurchaseProductsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PersonIdentification">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PersonIdentificationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PersonIdentificationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewBank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="bank" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewBankResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewBankResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBankResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateBankResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAdministrator">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAdmin" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdministratorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAdministratorResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBanks">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBanksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBanksResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCardType">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCardTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCardTypeResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHistorique">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetHistoriqueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoriqueResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllClients">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllClientsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllClientsResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarteBancaire">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idClient" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarteBancaireResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarteBancaireResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NewTypeCarteSoapIn">
+    <wsdl:part name="parameters" element="tns:NewTypeCarte" />
+  </wsdl:message>
+  <wsdl:message name="NewTypeCarteSoapOut">
+    <wsdl:part name="parameters" element="tns:NewTypeCarteResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddCarteForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:AddCarteForClient" />
+  </wsdl:message>
+  <wsdl:message name="AddCarteForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:AddCarteForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCarteBancaireForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteCarteBancaireForClient" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCarteBancaireForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteCarteBancaireForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTypeCarteSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTypeCarte" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTypeCarteSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTypeCarteResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewUserSoapIn">
+    <wsdl:part name="parameters" element="tns:NewUser" />
+  </wsdl:message>
+  <wsdl:message name="NewUserSoapOut">
+    <wsdl:part name="parameters" element="tns:NewUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewAdminSoapIn">
+    <wsdl:part name="parameters" element="tns:NewAdmin" />
+  </wsdl:message>
+  <wsdl:message name="NewAdminSoapOut">
+    <wsdl:part name="parameters" element="tns:NewAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAccount" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="DebitTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:DebitTransaction" />
+  </wsdl:message>
+  <wsdl:message name="DebitTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:DebitTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreditTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:CreditTransaction" />
+  </wsdl:message>
+  <wsdl:message name="CreditTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:CreditTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:PurchaseProducts" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:PurchaseProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PersonIdentificationSoapIn">
+    <wsdl:part name="parameters" element="tns:PersonIdentification" />
+  </wsdl:message>
+  <wsdl:message name="PersonIdentificationSoapOut">
+    <wsdl:part name="parameters" element="tns:PersonIdentificationResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewBankSoapIn">
+    <wsdl:part name="parameters" element="tns:NewBank" />
+  </wsdl:message>
+  <wsdl:message name="NewBankSoapOut">
+    <wsdl:part name="parameters" element="tns:NewBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBankSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBank" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBankSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClient" />
+  </wsdl:message>
+  <wsdl:message name="GetClientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdministratorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAdministrator" />
+  </wsdl:message>
+  <wsdl:message name="GetAdministratorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAdministratorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBanksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBanks" />
+  </wsdl:message>
+  <wsdl:message name="GetBanksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBanksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCardType" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCardTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoriqueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHistorique" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoriqueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHistoriqueResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllClientsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllClients" />
+  </wsdl:message>
+  <wsdl:message name="GetAllClientsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarteBancaireSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarteBancaire" />
+  </wsdl:message>
+  <wsdl:message name="GetCarteBancaireSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarteBancaireResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="NewTypeCarte">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Add a new card type into the DB.</wsdl:documentation>
+      <wsdl:input message="tns:NewTypeCarteSoapIn" />
+      <wsdl:output message="tns:NewTypeCarteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCarteForClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ajouter une carte bancaire</wsdl:documentation>
+      <wsdl:input message="tns:AddCarteForClientSoapIn" />
+      <wsdl:output message="tns:AddCarteForClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarteBancaireForClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Suprimer une carte à un Client</wsdl:documentation>
+      <wsdl:input message="tns:DeleteCarteBancaireForClientSoapIn" />
+      <wsdl:output message="tns:DeleteCarteBancaireForClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTypeCarte">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update the name of a card type into the DB.</wsdl:documentation>
+      <wsdl:input message="tns:UpdateTypeCarteSoapIn" />
+      <wsdl:output message="tns:UpdateTypeCarteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create and register an account for a client.</wsdl:documentation>
+      <wsdl:input message="tns:NewUserSoapIn" />
+      <wsdl:output message="tns:NewUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewAdmin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create and register an account for an administrator.</wsdl:documentation>
+      <wsdl:input message="tns:NewAdminSoapIn" />
+      <wsdl:output message="tns:NewAdminSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete a client account.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteAccountSoapIn" />
+      <wsdl:output message="tns:DeleteAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitTransaction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enables to debit his own client account.</wsdl:documentation>
+      <wsdl:input message="tns:DebitTransactionSoapIn" />
+      <wsdl:output message="tns:DebitTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditTransaction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enables to credit his own client account.</wsdl:documentation>
+      <wsdl:input message="tns:CreditTransactionSoapIn" />
+      <wsdl:output message="tns:CreditTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseProducts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">do purchase</wsdl:documentation>
+      <wsdl:input message="tns:PurchaseProductsSoapIn" />
+      <wsdl:output message="tns:PurchaseProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PersonIdentification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">identified client</wsdl:documentation>
+      <wsdl:input message="tns:PersonIdentificationSoapIn" />
+      <wsdl:output message="tns:PersonIdentificationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewBank">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Add a new bank into DB.</wsdl:documentation>
+      <wsdl:input message="tns:NewBankSoapIn" />
+      <wsdl:output message="tns:NewBankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBank">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update the name of a bank in the DB.</wsdl:documentation>
+      <wsdl:input message="tns:UpdateBankSoapIn" />
+      <wsdl:output message="tns:UpdateBankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get client information</wsdl:documentation>
+      <wsdl:input message="tns:GetClientSoapIn" />
+      <wsdl:output message="tns:GetClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdministrator">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get administrator information</wsdl:documentation>
+      <wsdl:input message="tns:GetAdministratorSoapIn" />
+      <wsdl:output message="tns:GetAdministratorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all banks information</wsdl:documentation>
+      <wsdl:input message="tns:GetBanksSoapIn" />
+      <wsdl:output message="tns:GetBanksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all card type information</wsdl:documentation>
+      <wsdl:input message="tns:GetCardTypeSoapIn" />
+      <wsdl:output message="tns:GetCardTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorique">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Historique information</wsdl:documentation>
+      <wsdl:input message="tns:GetHistoriqueSoapIn" />
+      <wsdl:output message="tns:GetHistoriqueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all clients information</wsdl:documentation>
+      <wsdl:input message="tns:GetAllClientsSoapIn" />
+      <wsdl:output message="tns:GetAllClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarteBancaire">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get bank card of the client</wsdl:documentation>
+      <wsdl:input message="tns:GetCarteBancaireSoapIn" />
+      <wsdl:output message="tns:GetCarteBancaireSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewTypeCarte">
+      <soap:operation soapAction="http://tempuri.org/NewTypeCarte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCarteForClient">
+      <soap:operation soapAction="http://tempuri.org/AddCarteForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarteBancaireForClient">
+      <soap:operation soapAction="http://tempuri.org/DeleteCarteBancaireForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTypeCarte">
+      <soap:operation soapAction="http://tempuri.org/UpdateTypeCarte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewUser">
+      <soap:operation soapAction="http://tempuri.org/NewUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewAdmin">
+      <soap:operation soapAction="http://tempuri.org/NewAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <soap:operation soapAction="http://tempuri.org/DeleteAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitTransaction">
+      <soap:operation soapAction="http://tempuri.org/DebitTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditTransaction">
+      <soap:operation soapAction="http://tempuri.org/CreditTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseProducts">
+      <soap:operation soapAction="http://tempuri.org/PurchaseProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PersonIdentification">
+      <soap:operation soapAction="http://tempuri.org/PersonIdentification" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewBank">
+      <soap:operation soapAction="http://tempuri.org/NewBank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBank">
+      <soap:operation soapAction="http://tempuri.org/UpdateBank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClient">
+      <soap:operation soapAction="http://tempuri.org/GetClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdministrator">
+      <soap:operation soapAction="http://tempuri.org/GetAdministrator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <soap:operation soapAction="http://tempuri.org/GetBanks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <soap:operation soapAction="http://tempuri.org/GetCardType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorique">
+      <soap:operation soapAction="http://tempuri.org/GetHistorique" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <soap:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarteBancaire">
+      <soap:operation soapAction="http://tempuri.org/GetCarteBancaire" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewTypeCarte">
+      <soap12:operation soapAction="http://tempuri.org/NewTypeCarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCarteForClient">
+      <soap12:operation soapAction="http://tempuri.org/AddCarteForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarteBancaireForClient">
+      <soap12:operation soapAction="http://tempuri.org/DeleteCarteBancaireForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTypeCarte">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTypeCarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewUser">
+      <soap12:operation soapAction="http://tempuri.org/NewUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewAdmin">
+      <soap12:operation soapAction="http://tempuri.org/NewAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <soap12:operation soapAction="http://tempuri.org/DeleteAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitTransaction">
+      <soap12:operation soapAction="http://tempuri.org/DebitTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditTransaction">
+      <soap12:operation soapAction="http://tempuri.org/CreditTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseProducts">
+      <soap12:operation soapAction="http://tempuri.org/PurchaseProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PersonIdentification">
+      <soap12:operation soapAction="http://tempuri.org/PersonIdentification" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewBank">
+      <soap12:operation soapAction="http://tempuri.org/NewBank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBank">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClient">
+      <soap12:operation soapAction="http://tempuri.org/GetClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdministrator">
+      <soap12:operation soapAction="http://tempuri.org/GetAdministrator" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <soap12:operation soapAction="http://tempuri.org/GetBanks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <soap12:operation soapAction="http://tempuri.org/GetCardType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorique">
+      <soap12:operation soapAction="http://tempuri.org/GetHistorique" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <soap12:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarteBancaire">
+      <soap12:operation soapAction="http://tempuri.org/GetCarteBancaire" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://localhost:53000/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://localhost:53000/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,9 @@
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\bin\Debug\Magasin.exe.config
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\bin\Debug\Magasin.exe
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\bin\Debug\Magasin.pdb
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.csprojResolveAssemblyReference.cache
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.MainMenu.resources
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.Properties.Resources.resources
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.csproj.GenerateResource.Cache
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.exe
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\Magasin\obj\Debug\Magasin.pdb

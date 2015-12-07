@@ -41,12 +41,21 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public CarteBancaire(int id, int numero, DateTime dateExpi, int pycto, TypeCarte type, Banque hisBank) 
+        public CarteBancaire(int numero, DateTime dateExpi, int crypto, TypeCarte type, Banque hisBank)
+        {
+            number = numero;
+            experationDate = dateExpi;
+            cryctogramme = crypto;
+            typeCard = type;
+            banque = hisBank;
+        }
+
+        public CarteBancaire(int id, int numero, DateTime dateExpi, int crypto, TypeCarte type, Banque hisBank) 
         {
             bankCardId = id;
             number = numero;
             experationDate = dateExpi;
-            cryctogramme = pycto;
+            cryctogramme = crypto;
             typeCard = type;
             banque = hisBank;
         }

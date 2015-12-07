@@ -28,6 +28,15 @@ namespace purchase_service.DAO
             return ExecuteReader(cmd);
         }
 
+        public static List<Banque> AllBanque()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = string.Format("select * from BANQUE");
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = BDDConnexion.Conn;
+            return ExecuteReader(cmd);
+        }
+
         private static List<Banque> ExecuteReader(SqlCommand cmd)
         {
             SqlDataReader reader;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using purchase_service.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,5 +33,17 @@ namespace purchase_service.BO
         }
 
         #endregion
+
+        public static bool LinkClientAndCarteBancaire(Client currentClient, CarteBancaire currentCard)
+        {
+
+            List<ClientCarteBancaire> clientCarteBancaireDB = ClientCarteBancaireDAO.Search("ID_CLIENT='" + currentClient.ClientId + "' AND ID_CARTE_BANCAIRE = '" + currentCard.BankCardId + "'");
+            if (clientCarteBancaireDB.Any())
+                return false;
+
+            ClientCarteBancaire newCarte = new ClientCarteBancaire(currentClient, currentCard);
+            ClientCarteBancaireDAO.Insert(newCarte);
+            return true;
+        }
     }
 }

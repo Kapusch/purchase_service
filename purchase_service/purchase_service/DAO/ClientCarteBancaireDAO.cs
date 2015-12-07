@@ -61,7 +61,7 @@ namespace purchase_service.DAO
                 throw (e);
             }
         }
-        /**********************************************************************/
+
         public static void Delete(int id)
         {
             SqlCommand cmd = new SqlCommand();
@@ -79,7 +79,6 @@ namespace purchase_service.DAO
                 throw (e);
             }
         }
-        /**********************************************************************/
    
     }
 }

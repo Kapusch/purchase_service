@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "purchase_service", "purchase_service\purchase_service.csproj", "{66E44D75-6F7D-4C88-AFAF-B243FE8A26D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "purchase_app", "purchase_app\purchase_app.csproj", "{7E89FB63-3451-443D-9928-22A49E3E41C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "shop\Shop.csproj", "{710C9D0E-7D35-42D3-A6C1-6363A84C47F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,10 @@ Global
 		{7E89FB63-3451-443D-9928-22A49E3E41C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E89FB63-3451-443D-9928-22A49E3E41C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E89FB63-3451-443D-9928-22A49E3E41C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710C9D0E-7D35-42D3-A6C1-6363A84C47F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710C9D0E-7D35-42D3-A6C1-6363A84C47F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710C9D0E-7D35-42D3-A6C1-6363A84C47F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710C9D0E-7D35-42D3-A6C1-6363A84C47F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

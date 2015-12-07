@@ -19,6 +19,15 @@ namespace purchase_service.DAO
             return ExecuteReader(cmd);
         }
 
+        public static List<Historique> AllHistorique()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = string.Format("select * from HISTORIQUE");
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = BDDConnexion.Conn;
+            return ExecuteReader(cmd);
+        }
+
         private static List<Historique> ExecuteReader(SqlCommand cmd)
         {
             SqlDataReader reader;

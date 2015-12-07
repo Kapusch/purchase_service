@@ -28,6 +28,15 @@ namespace purchase_service.DAO
             return ExecuteReader(cmd);
         }
 
+        public static List<Client> AllClients()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = string.Format("select * from CLIENT");
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = BDDConnexion.Conn;
+            return ExecuteReader(cmd);
+        }
+
         private static List<Client> ExecuteReader(SqlCommand cmd)
         {
             SqlDataReader reader;
