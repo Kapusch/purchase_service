@@ -38,6 +38,7 @@
             this.Name = "Delivery";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Livraison";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }

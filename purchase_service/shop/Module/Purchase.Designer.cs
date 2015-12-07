@@ -38,6 +38,7 @@
             this.Name = "Purchase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Achat";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }

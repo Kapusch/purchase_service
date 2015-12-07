@@ -32,6 +32,7 @@
             this.pbPurchase = new System.Windows.Forms.PictureBox();
             this.pbPayment = new System.Windows.Forms.PictureBox();
             this.pbDelivery = new System.Windows.Forms.PictureBox();
+            this.llblConnected = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbPurchase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDelivery)).BeginInit();
@@ -76,12 +77,27 @@
             this.pbDelivery.Click += new System.EventHandler(this.pbDelivery_Click);
             this.pbDelivery.MouseEnter += new System.EventHandler(this.pbDelivery_MouseEnter);
             // 
+            // llblConnected
+            // 
+            this.llblConnected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.llblConnected.AutoSize = true;
+            this.llblConnected.BackColor = System.Drawing.Color.Transparent;
+            this.llblConnected.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llblConnected.Location = new System.Drawing.Point(474, 31);
+            this.llblConnected.Name = "llblConnected";
+            this.llblConnected.Size = new System.Drawing.Size(96, 18);
+            this.llblConnected.TabIndex = 3;
+            this.llblConnected.TabStop = true;
+            this.llblConnected.Text = "Se connecter";
+            this.llblConnected.Click += new System.EventHandler(this.llblConnected_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Magasin.SR._73365c9393b442b05c9ca44b1be6d20f_large;
             this.ClientSize = new System.Drawing.Size(602, 373);
+            this.Controls.Add(this.llblConnected);
             this.Controls.Add(this.pbDelivery);
             this.Controls.Add(this.pbPayment);
             this.Controls.Add(this.pbPurchase);
@@ -96,6 +112,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDelivery)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -104,6 +121,7 @@
         private System.Windows.Forms.PictureBox pbPurchase;
         private System.Windows.Forms.PictureBox pbPayment;
         private System.Windows.Forms.PictureBox pbDelivery;
+        private System.Windows.Forms.LinkLabel llblConnected;
 
     }
 }

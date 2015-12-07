@@ -1,4 +1,6 @@
-﻿using Magasin.Module;
+﻿using Magasin.BO;
+using Magasin.Module;
+using Magasin.Module.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,10 @@ namespace Magasin
         private Delivery pageDelivery;
         private Payment pagePayment;
         private Purchase pagePurchase;
+
+        private LoginBox identification;
         private const int size = 106;
+        private Client currentClient;
 
         private Delivery PageDelivery { get {
             if (pageDelivery == null)
@@ -45,6 +50,19 @@ namespace Magasin
             }
             return pagePurchase;
         }}
+
+        private LoginBox Identification
+        {
+            get
+            {
+                if (identification == null)
+                {
+                    identification = new LoginBox();
+                    identification.FormClosing += this.CloseLoginBox;
+                }
+                return identification;
+            }
+        }
 
         #endregion
         
@@ -94,6 +112,16 @@ namespace Magasin
             PageDelivery.Focus();
         }
 
+        private void llblConnected_Click(object sender, EventArgs e)
+        {
+            using (Identification)
+            {
+                if (!(Identification.ShowDialog()==DialogResult.No))
+                    currentClient = new Client();
+            }
+            identification = null;
+        }
+
         private void MainMenu_Load(object sender, EventArgs e)
         {
             pbDelivery.Image = SR.icone_livraison;
@@ -128,7 +156,6 @@ namespace Magasin
 
         private void BiggerEffect (PictureBox picture, Bitmap newImage)
         {
-            picture.Image = null;
             if (picture.Width != size)
             {
                 picture.Width = size;
@@ -153,6 +180,12 @@ namespace Magasin
         {
             pagePayment.Dispose();
             pagePayment = null;
+        }
+
+        private void CloseLoginBox(object sender, FormClosingEventArgs e)
+        {
+            identification.Dispose();
+            identification = null;
         }
     }
 }
