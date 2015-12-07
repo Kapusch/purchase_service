@@ -24,7 +24,8 @@ namespace Magasin
 
         private LoginBox identification;
         private const int size = 106;
-        private Client currentClient;
+
+        public Client CurrentClient { get; set; }
 
         private Delivery PageDelivery { get {
             if (pageDelivery == null)
@@ -116,8 +117,14 @@ namespace Magasin
         {
             using (Identification)
             {
-                if (!(Identification.ShowDialog()==DialogResult.No))
-                    currentClient = new Client();
+                if (!(Identification.ShowDialog() == DialogResult.No))
+                    if (CurrentClient!=null)
+                    {
+                        lblClientProfil.Text = CurrentClient.firstName + " " + CurrentClient.name;
+                        lblClientProfil.Visible = true;
+                        llblConnected.Visible = false;
+                    }
+                
             }
             identification = null;
         }
@@ -152,6 +159,11 @@ namespace Magasin
             }
         }
 
+        private void lblClientProfil_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
         private void BiggerEffect (PictureBox picture, Bitmap newImage)
@@ -184,6 +196,8 @@ namespace Magasin
 
         private void CloseLoginBox(object sender, FormClosingEventArgs e)
         {
+            if (Identification.CurrentClient != null)
+                CurrentClient = Identification.CurrentClient;
             identification.Dispose();
             identification = null;
         }

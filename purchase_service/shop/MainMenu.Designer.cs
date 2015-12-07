@@ -33,6 +33,7 @@
             this.pbPayment = new System.Windows.Forms.PictureBox();
             this.pbDelivery = new System.Windows.Forms.PictureBox();
             this.llblConnected = new System.Windows.Forms.LinkLabel();
+            this.lblClientProfil = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbPurchase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDelivery)).BeginInit();
@@ -91,12 +92,26 @@
             this.llblConnected.Text = "Se connecter";
             this.llblConnected.Click += new System.EventHandler(this.llblConnected_Click);
             // 
+            // lblClientProfil
+            // 
+            this.lblClientProfil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblClientProfil.AutoSize = true;
+            this.lblClientProfil.BackColor = System.Drawing.Color.Transparent;
+            this.lblClientProfil.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientProfil.Location = new System.Drawing.Point(468, 31);
+            this.lblClientProfil.Name = "lblClientProfil";
+            this.lblClientProfil.Size = new System.Drawing.Size(0, 18);
+            this.lblClientProfil.TabIndex = 4;
+            this.lblClientProfil.Visible = false;
+            this.lblClientProfil.Click += new System.EventHandler(this.lblClientProfil_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Magasin.SR._73365c9393b442b05c9ca44b1be6d20f_large;
             this.ClientSize = new System.Drawing.Size(602, 373);
+            this.Controls.Add(this.lblClientProfil);
             this.Controls.Add(this.llblConnected);
             this.Controls.Add(this.pbDelivery);
             this.Controls.Add(this.pbPayment);
@@ -122,6 +137,7 @@
         private System.Windows.Forms.PictureBox pbPayment;
         private System.Windows.Forms.PictureBox pbDelivery;
         private System.Windows.Forms.LinkLabel llblConnected;
+        private System.Windows.Forms.LinkLabel lblClientProfil;
 
     }
 }

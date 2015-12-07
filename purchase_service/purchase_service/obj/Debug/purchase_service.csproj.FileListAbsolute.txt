@@ -13,4 +13,3 @@ C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_ser
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.csprojResolveAssemblyReference.cache
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.csprojResolveAssemblyReference.cache

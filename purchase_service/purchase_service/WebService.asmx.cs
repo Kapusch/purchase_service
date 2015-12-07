@@ -353,8 +353,8 @@ namespace purchase_service
             {
                 List<Client> currentClient = ClientDAO.Search("LOGIN_CLIENT='" + login + "' and PASSWORD='" + pwd + "' AND IS_DELETE=0");
                 List<Administrateur> currentAdministrateur = AdministrateurDAO.Search("LOGIN_ADMINISTRATEUR='" + login + "' and PASSWORD='" + pwd + "'");
-                if (currentClient == null)
-                    if (currentAdministrateur == null)
+                if (currentClient.Count == 0 )
+                    if (currentAdministrateur.Count == 0)
                         throw new Exception ("Le profil renseigné n'existe pas");
 
                 if (currentClient.Count > 1 || currentAdministrateur.Count > 1 || (currentClient.Any() && currentAdministrateur.Any()))
@@ -363,7 +363,7 @@ namespace purchase_service
 
                 BDDConnexion.CloseConnection();
 
-                if (currentClient.Any())
+                if (currentClient.Count != 0)
                     return currentClient.FirstOrDefault().ClientId.ToString();
                 else
                     return currentAdministrateur.FirstOrDefault().AdministratorId.ToString();

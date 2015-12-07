@@ -1,4 +1,4 @@
-﻿namespace Magasin.Module.Tools
+﻿namespace Magasin
 {
     partial class LoginBox
     {
@@ -56,6 +56,7 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(154, 20);
             this.tbPassword.TabIndex = 1;
+            this.tbPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPassword_KeyDown);
             // 
             // lblLogin
             // 
