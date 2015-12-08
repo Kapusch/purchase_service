@@ -172,9 +172,9 @@ namespace purchase_service
                 List<Client> clientDB = ClientDAO.Search("LOGIN_CLIENT = '" + login + "'");
                 if (!clientDB.Any())
                 {
-                    Client newClient = new Client(0, login, pwdClient, nameClient, firstNameClient, DateTime.Now, soldClient, false);
+                    Client newClient = new Client( login, pwdClient, nameClient, firstNameClient, DateTime.Now, soldClient, false);
                     ClientDAO.Insert(newClient);
-                    msg = "Le compte de " + nameClient + " " + firstNameClient + " vient d'être ouvert avec un solde initial de " + soldClient + " €. L'identifiant associé est: " + login;
+                    msg = "OK";
                 }
                 else
                 {
@@ -304,7 +304,7 @@ namespace purchase_service
                         newHistorique = new Historique(clientDB, amount, clientDB.Sold);
                         ClientDAO.Update(clientDB);
                         HistoriqueDAO.Insert(newHistorique);
-                        msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " vient d'être crédité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB.Sold + amount) + "€";
+                        msg = "OK";
                     }
                     else
                     {

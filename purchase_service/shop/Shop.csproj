@@ -73,6 +73,12 @@
     <Compile Include="Module\Purchase.Designer.cs">
       <DependentUpon>Purchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module\Tools\ClientInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module\Tools\ClientInformation.Designer.cs">
+      <DependentUpon>ClientInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Module\Tools\DisplayProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,12 @@
     </Compile>
     <Compile Include="Module\Tools\LoginBox.Designer.cs">
       <DependentUpon>LoginBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Module\Tools\SignIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module\Tools\SignIn.Designer.cs">
+      <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +127,9 @@
     <EmbeddedResource Include="Module\Purchase.resx">
       <DependentUpon>Purchase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Module\Tools\ClientInformation.resx">
+      <DependentUpon>ClientInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Module\Tools\DisplayProduct.resx">
       <DependentUpon>DisplayProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Module\Tools\LoginBox.resx">
       <DependentUpon>LoginBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Module\Tools\SignIn.resx">
+      <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

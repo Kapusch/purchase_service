@@ -28,6 +28,7 @@ namespace Magasin.BO
         public Client(int idClient)
         {
             PurchaseService.WebServiceSoapClient service = new PurchaseService.WebServiceSoapClient();
+            this.clientId = idClient;
             result = service.GetClient(idClient);
         }
 

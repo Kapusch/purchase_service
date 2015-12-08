@@ -23,6 +23,8 @@ namespace Magasin
         private Purchase pagePurchase;
 
         private LoginBox identification;
+        private SignIn inscription;
+        private ClientInformation infoClient;
         private const int size = 106;
 
         public Client CurrentClient { get; set; }
@@ -38,7 +40,7 @@ namespace Magasin
         private Payment PagePayment { get {
             if (pagePayment == null)
             {
-                pagePayment = new Payment();
+                pagePayment = new Payment(CurrentClient);
                 pagePayment.FormClosing += this.ClosePagePayment;
             }
             return pagePayment;}}
@@ -65,6 +67,34 @@ namespace Magasin
             }
         }
 
+        private ClientInformation InfoClient
+        {
+            get
+            {
+                if (infoClient == null)
+                {
+                    infoClient = new ClientInformation(CurrentClient);
+                    infoClient.FormClosing += this.CloseClientInformation;
+                }
+                return infoClient;
+            }
+        }
+
+        private SignIn Inscription
+        {
+            get
+            {
+                if (inscription == null)
+                {
+                    inscription = new SignIn();
+                    inscription.FormClosing += this.CloseInscription;
+                }
+                return inscription;
+            }
+        }
+
+        
+
         #endregion
         
         public MainMenu()
@@ -74,11 +104,6 @@ namespace Magasin
 
 
         #region events
-
-        private void MainMenu_MouseHover(object sender, EventArgs e)
-        {
-            
-        }
 
         private void pbPurchase_MouseEnter(object sender, EventArgs e)
         {
@@ -97,19 +122,22 @@ namespace Magasin
 
         private void pbPurchase_Click(object sender, EventArgs e)
         {
-            PagePurchase.Show();
+            PagePurchase.ShowDialog();
             PagePurchase.Focus();
         }
 
         private void pbPayment_Click(object sender, EventArgs e)
         {
-            PagePayment.Show();
+            if (CurrentClient == null)
+                return;
+
+            PagePayment.ShowDialog();
             PagePayment.Focus();
         }
 
         private void pbDelivery_Click(object sender, EventArgs e)
         {
-            PageDelivery.Show();
+            PageDelivery.ShowDialog();
             PageDelivery.Focus();
         }
 
@@ -161,7 +189,28 @@ namespace Magasin
 
         private void lblClientProfil_Click(object sender, EventArgs e)
         {
+            if (CurrentClient == null)
+                return;
 
+            using (InfoClient)
+            {
+                InfoClient.ShowDialog();
+            }
+        }
+
+        private void llblSignIn_Click(object sender, EventArgs e)
+        {
+            using (Inscription)
+            {
+                if (Inscription.ShowDialog()==DialogResult.OK)
+                {
+                    InformationBox info = new InformationBox("Le profil a été créé avec succès");
+                    using (info)
+                    {
+                        info.ShowDialog();
+                    }
+                }
+            }
         }
 
         #endregion
@@ -200,6 +249,18 @@ namespace Magasin
                 CurrentClient = Identification.CurrentClient;
             identification.Dispose();
             identification = null;
+        }
+
+        private void CloseInscription(object sender, FormClosingEventArgs e)
+        {
+            inscription.Dispose();
+            inscription = null;
+        }
+
+        private void CloseClientInformation(object sender, FormClosingEventArgs e)
+        {
+            infoClient.Dispose();
+            infoClient = null;
         }
     }
 }

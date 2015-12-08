@@ -38,7 +38,7 @@ namespace Magasin
                 return this.DialogResult = DialogResult.No;
 
             PurchaseService.WebServiceSoapClient service = new PurchaseService.WebServiceSoapClient();
-            string result = service.PersonIdentification(tbLogin.Text, tbLogin.Text);
+            string result = service.PersonIdentification(tbLogin.Text, tbPassword.Text);
 
             int idClient;
             if (!Int32.TryParse(result, out idClient))

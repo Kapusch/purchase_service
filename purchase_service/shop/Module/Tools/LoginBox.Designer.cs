@@ -116,6 +116,7 @@
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbLogin);
             this.Name = "LoginBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Identification";
             this.ResumeLayout(false);
             this.PerformLayout();

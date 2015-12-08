@@ -62,6 +62,17 @@ namespace purchase_service.BO
             isDelete = isDeleteC;
         }
 
+        public Client(string login, string passwordC, string nameClient, string firstname
+                        , DateTime inscripDate, int soldC, bool isDeleteC)
+        {
+            clientLogin = login;
+            password = passwordC;
+            name = nameClient;
+            firstName = firstname;
+            inscriptionDate = inscripDate;
+            sold = soldC;
+            isDelete = isDeleteC;
+        }
         #endregion
 
         public bool Update()

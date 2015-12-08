@@ -34,6 +34,7 @@
             this.pbDelivery = new System.Windows.Forms.PictureBox();
             this.llblConnected = new System.Windows.Forms.LinkLabel();
             this.lblClientProfil = new System.Windows.Forms.LinkLabel();
+            this.llblSignIn = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbPurchase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDelivery)).BeginInit();
@@ -105,12 +106,26 @@
             this.lblClientProfil.Visible = false;
             this.lblClientProfil.Click += new System.EventHandler(this.lblClientProfil_Click);
             // 
+            // llblSignIn
+            // 
+            this.llblSignIn.AutoSize = true;
+            this.llblSignIn.BackColor = System.Drawing.Color.Transparent;
+            this.llblSignIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llblSignIn.Location = new System.Drawing.Point(37, 31);
+            this.llblSignIn.Name = "llblSignIn";
+            this.llblSignIn.Size = new System.Drawing.Size(75, 18);
+            this.llblSignIn.TabIndex = 5;
+            this.llblSignIn.TabStop = true;
+            this.llblSignIn.Text = "Inscription";
+            this.llblSignIn.Click += new System.EventHandler(this.llblSignIn_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Magasin.SR._73365c9393b442b05c9ca44b1be6d20f_large;
             this.ClientSize = new System.Drawing.Size(602, 373);
+            this.Controls.Add(this.llblSignIn);
             this.Controls.Add(this.lblClientProfil);
             this.Controls.Add(this.llblConnected);
             this.Controls.Add(this.pbDelivery);
@@ -138,6 +153,7 @@
         private System.Windows.Forms.PictureBox pbDelivery;
         private System.Windows.Forms.LinkLabel llblConnected;
         private System.Windows.Forms.LinkLabel lblClientProfil;
+        private System.Windows.Forms.LinkLabel llblSignIn;
 
     }
 }
