@@ -28,8 +28,8 @@ namespace Magasin.Module.Tools
                 || string.IsNullOrWhiteSpace(tbLogin.Text) || string.IsNullOrWhiteSpace(tbPassword.Text) || string.IsNullOrWhiteSpace(tbFirstName.Text) || string.IsNullOrWhiteSpace(tbName.Text))
                 return this.DialogResult = DialogResult.No;
 
-            PurchaseService.WebServiceSoapClient service = new PurchaseService.WebServiceSoapClient();
-            string result = service.NewUser(tbLogin.Text, tbPassword.Text, tbName.Text, tbFirstName.Text, 0);
+            
+            string result = Service.GetService.NewUser(tbLogin.Text, tbPassword.Text, tbName.Text, tbFirstName.Text, 0);
             if (!result.Equals("OK"))
             {
                 InformationBox info = new InformationBox(result);

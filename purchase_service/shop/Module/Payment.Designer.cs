@@ -44,12 +44,16 @@
             this.lbOrder = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.cbCards = new System.Windows.Forms.ComboBox();
+            this.lblCurrentCard = new System.Windows.Forms.Label();
             this.gbInfo.SuspendLayout();
             this.gbOrder.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbInfo
             // 
+            this.gbInfo.Controls.Add(this.lblCurrentCard);
+            this.gbInfo.Controls.Add(this.cbCards);
             this.gbInfo.Controls.Add(this.lblReload);
             this.gbInfo.Controls.Add(this.lblDevise3);
             this.gbInfo.Controls.Add(this.tbReload);
@@ -204,6 +208,23 @@
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
+            // cbCards
+            // 
+            this.cbCards.FormattingEnabled = true;
+            this.cbCards.Location = new System.Drawing.Point(18, 216);
+            this.cbCards.Name = "cbCards";
+            this.cbCards.Size = new System.Drawing.Size(121, 21);
+            this.cbCards.TabIndex = 7;
+            // 
+            // lblCurrentCard
+            // 
+            this.lblCurrentCard.AutoSize = true;
+            this.lblCurrentCard.Location = new System.Drawing.Point(18, 190);
+            this.lblCurrentCard.Name = "lblCurrentCard";
+            this.lblCurrentCard.Size = new System.Drawing.Size(76, 13);
+            this.lblCurrentCard.TabIndex = 8;
+            this.lblCurrentCard.Text = "Carte débitée :";
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,5 +264,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPay;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Label lblCurrentCard;
+        private System.Windows.Forms.ComboBox cbCards;
     }
 }

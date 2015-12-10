@@ -26,11 +26,12 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public ClientCarteBancaire(Client cli, CarteBancaire bankcard) 
+        public ClientCarteBancaire(Client cli, CarteBancaire bankcard)
         {
             client = cli;
             bankCard = bankcard;
         }
+
 
         #endregion
 

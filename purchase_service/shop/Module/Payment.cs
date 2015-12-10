@@ -14,7 +14,6 @@ namespace Magasin.Module
 {
     public partial class Payment : Form
     {
-        private PurchaseService.WebServiceSoapClient service = new PurchaseService.WebServiceSoapClient();
         private Client currentClient;
 
         public Payment(Client client)
@@ -26,6 +25,24 @@ namespace Magasin.Module
         private void Payment_Load(object sender, EventArgs e)
         {
             lblClientSold.Text = currentClient.sold.ToString();
+
+            var cards = Service.GetService.GetCarteBancaire(currentClient.clientId);
+            if (cards == null)
+                return;
+            if (cards[0].Count<2)
+                using (var info = new InformationBox(cards[0][0]))
+                {
+                    info.ShowDialog();
+                    return;
+                }
+
+            List<string> cardsNumbers = new List<string> {};
+
+            foreach (var card in cards)
+            {
+                cardsNumbers.Add(card[0]);
+            }
+            cbCards.DataSource = cardsNumbers;
         }
 
         private void btnReload_Click(object sender, EventArgs e)
@@ -42,30 +59,35 @@ namespace Magasin.Module
                 {
                     if (addMonney < 1)
                         return;
-                    string result = service.CreditTransaction(currentClient.clientId, addMonney);
+                    string result = Service.GetService.CreditTransaction(currentClient.clientId, addMonney);
                     if (!(result == "OK"))
                         using (var info = new InformationBox(result))
                         {
                             info.ShowDialog();
                         }
                     else
+                    {
+                        tbReload.Text = string.Empty;
                         RefreshScreen();
+                    }
                 }
             }
         }
 
         private void RefreshScreen()
         {
-            var result = service.GetClient(currentClient.clientId);
+            var result = Service.GetService.GetClient(currentClient.clientId);
 
             if (string.IsNullOrEmpty(result[1])||string.IsNullOrWhiteSpace(result[1]))
                 using (var info = new InformationBox(result[0]))
                 {
                     info.ShowDialog();
+                    cbCards.SelectedIndex = 0;
                     return;
                 }
             currentClient.FillClient(result);
             lblClientSold.Text = currentClient.sold.ToString();
+            cbCards.SelectedIndex = 0;
         }
 
         private void tbReload_KeyDown(object sender, KeyEventArgs e)

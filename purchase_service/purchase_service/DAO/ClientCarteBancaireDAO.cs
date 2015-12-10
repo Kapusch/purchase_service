@@ -16,7 +16,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CLIENT_CARTE_BANCAIRE where {0}", condition);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd);
+            var result = ExecuteReader(cmd);
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         private static List<ClientCarteBancaire> ExecuteReader(SqlCommand cmd)
@@ -41,6 +44,8 @@ namespace purchase_service.DAO
             }
 
             reader.Close();
+            reader.Dispose();
+            reader = null;
             return result;
         }
 
@@ -60,6 +65,11 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+            }
         }
 
         public static void Delete(int id)
@@ -77,6 +87,11 @@ namespace purchase_service.DAO
             catch (Exception e)
             {
                 throw (e);
+            }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
             }
         }
    

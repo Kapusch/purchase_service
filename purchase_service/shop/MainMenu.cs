@@ -21,6 +21,7 @@ namespace Magasin
         private Delivery pageDelivery;
         private Payment pagePayment;
         private Purchase pagePurchase;
+        private List<CartesBancaire> cartes;
 
         private LoginBox identification;
         private SignIn inscription;
@@ -73,7 +74,7 @@ namespace Magasin
             {
                 if (infoClient == null)
                 {
-                    infoClient = new ClientInformation(CurrentClient);
+                    infoClient = new ClientInformation(CurrentClient, null);
                     infoClient.FormClosing += this.CloseClientInformation;
                 }
                 return infoClient;

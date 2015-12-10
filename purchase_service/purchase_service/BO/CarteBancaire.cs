@@ -1,4 +1,5 @@
-﻿using System;
+﻿using purchase_service.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -43,6 +44,7 @@ namespace purchase_service.BO
 
         public CarteBancaire(int numero, DateTime dateExpi, int crypto, TypeCarte type, Banque hisBank)
         {
+            bankCardId = CarteBancaireDAO.GenerateId();
             number = numero;
             experationDate = dateExpi;
             cryctogramme = crypto;

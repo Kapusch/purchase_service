@@ -463,6 +463,7 @@ namespace purchase_service
             }
             catch (Exception ex)
             {
+                BDDConnexion.CloseConnection();
                 return new List<string> { ex.Message };
             }
         }
@@ -583,6 +584,7 @@ namespace purchase_service
                     result.Add(new List<string> { "Le client n'existe pas" });
                     return result;
                 }
+                BDDConnexion.CloseConnection();
 
                 List<CarteBancaire> currentBankCards = ClientCarteBancaireDAO.Search("ID_CLIENT='" + idClient + "'").Select(p => p.BankCard).ToList();
 

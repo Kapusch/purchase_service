@@ -15,7 +15,7 @@ namespace purchase_service
             get 
             {
                 if (conn == null)
-                    conn = new SqlConnection (@"Data Source=KYLROIL-PC\SQLEXPRESS;Initial Catalog=ACHAT;Integrated Security=True");
+                    conn = new SqlConnection (@"Data Source=KYLROIL-PC\SQLEXPRESS;Initial Catalog=ACHAT;Integrated Security=True; MultipleActiveResultSets=True");
                 if (!conn.State.Equals(ConnectionState.Open))
                     conn.Open();
                 return conn;

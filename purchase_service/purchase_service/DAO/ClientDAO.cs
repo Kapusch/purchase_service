@@ -16,7 +16,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CLIENT where ID_CLIENT={0}", id.ToString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd).FirstOrDefault();
+            var result = ExecuteReader(cmd).FirstOrDefault();
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         public static List<Client> Search(string condition)
@@ -25,7 +28,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CLIENT where {0}", condition);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd);
+            var result = ExecuteReader(cmd);
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         public static List<Client> AllClients()
@@ -34,18 +40,19 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CLIENT");
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd);
+            var result = ExecuteReader(cmd);
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         private static List<Client> ExecuteReader(SqlCommand cmd)
         {
-            SqlDataReader reader;
+            SqlDataReader reader = cmd.ExecuteReader();
 
             List<Client> result = new List<Client>();
             try
             {
-                reader = cmd.ExecuteReader();
-
                 while (reader.Read())
                 {
                     Client currentClient = new Client(Convert.ToInt32(reader["ID_CLIENT"]), reader["LOGIN_CLIENT"].ToString(), reader["PASSWORD"].ToString()
@@ -58,8 +65,12 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
-
-            reader.Close();
+            finally
+            {
+                reader.Close();
+                reader.Dispose();
+                reader = null;
+            }
             return result;
         }
 
@@ -78,6 +89,11 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+            }
         }
 
         private static int GenerateId()
@@ -94,6 +110,10 @@ namespace purchase_service.DAO
             }
 
             reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            cmd = null;
+            reader = null;
             return id;
         }
 
@@ -112,6 +132,11 @@ namespace purchase_service.DAO
             catch (Exception e)
             {
                 throw (e);
+            }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
             }
         }
     }

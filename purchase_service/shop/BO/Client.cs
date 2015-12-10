@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Magasin.Module.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +28,8 @@ namespace Magasin.BO
 
         public Client(int idClient)
         {
-            PurchaseService.WebServiceSoapClient service = new PurchaseService.WebServiceSoapClient();
             this.clientId = idClient;
-            result = service.GetClient(idClient);
+            result = Service.GetService.GetClient(idClient);
         }
 
         public void FillClient (PurchaseService.ArrayOfString info)
@@ -40,6 +40,36 @@ namespace Magasin.BO
             firstName = info[3];
             inscriptionDate = DateTime.Parse(info[4]);
             sold=Int32.Parse(info[5]);
+        }
+
+        public List<CartesBancaire> GetCartes()
+        {
+            try
+            {
+                var result = Service.GetService.GetCarteBancaire(this.clientId).ToList();
+
+                if (result.Count != 0 && result[0].Count<2)
+                    using (var info = new InformationBox(result[0][0]))
+                    {
+                        info.ShowDialog();
+                        return null;
+                    }
+                List<CartesBancaire> cartes = new List<CartesBancaire> { };
+                foreach (var currentCarte in result)
+                {
+                    cartes.Add(new CartesBancaire(Int32.Parse(currentCarte[0]), DateTime.Parse(currentCarte[1]), Int32.Parse(currentCarte[2]), currentCarte[3], currentCarte[4]));
+                }
+
+                return cartes;
+            }
+            catch (Exception ex)
+            {
+                using (var info = new InformationBox(ex.Message))
+                {
+                    info.ShowDialog();
+                    return null;
+                }
+            }
         }
     }
 }

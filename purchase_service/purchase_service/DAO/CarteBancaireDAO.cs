@@ -16,7 +16,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CARTE_BANCAIRE where ID_CARTE_BANCAIRE={0}", id.ToString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd).FirstOrDefault();
+            var result = ExecuteReader(cmd).FirstOrDefault();
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         public static List<CarteBancaire> Search(string condition)
@@ -25,7 +28,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from CARTE_BANCAIRE where {0}", condition);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd);
+            var result = ExecuteReader(cmd);
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         private static List<CarteBancaire> ExecuteReader(SqlCommand cmd)
@@ -40,8 +46,8 @@ namespace purchase_service.DAO
                 while (reader.Read())
                 {
                     CarteBancaire currentBankCard = new CarteBancaire(Convert.ToInt32(reader["ID_CARTE_BANCAIRE"]), Convert.ToInt32(reader["NUMERO"])
-                        ,DateTime.Parse(reader["DATE_EXPIRATION"].ToString()),Convert.ToInt32(reader["CRYPTOGRAMME"])
-                        ,TypeCarteDAO.Read(Convert.ToInt32(reader["ID_TYPE_CARTE"])), BanqueDAO.Read(Convert.ToInt32(reader["ID_BANQUE"])));
+                        , DateTime.Parse(reader["DATE_EXPIRATION"].ToString()), Convert.ToInt32(reader["CRYPTOGRAMME"])
+                        , TypeCarteDAO.Read(Convert.ToInt32(reader["ID_TYPE_CARTE"])), BanqueDAO.Read(Convert.ToInt32(reader["ID_BANQUE"])));
                     result.Add(currentBankCard);
                 }
             }
@@ -51,10 +57,12 @@ namespace purchase_service.DAO
             }
 
             reader.Close();
+            reader.Dispose();
+            reader = null;
             return result;
         }
 
-        private static int GenerateId()
+        public static int GenerateId()
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "select NEXT VALUE FOR SEQ_CARTE_BANCAIRE AS ID";
@@ -68,6 +76,10 @@ namespace purchase_service.DAO
             }
 
             reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            cmd = null;
+            reader = null;
             return id;
         }
 
@@ -75,8 +87,8 @@ namespace purchase_service.DAO
         {
             SqlCommand cmd = new SqlCommand();
             const string query = "INSERT INTO CARTE_BANCAIRE VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')";
-            cmd.CommandText = string.Format(query, GenerateId().ToString(), carteBancaire.Number, carteBancaire.ExperationDate.ToShortDateString()
-                ,carteBancaire.Cryctogramme, carteBancaire.TypeCard.CardTypeId, carteBancaire.Banque.BankId);
+            cmd.CommandText = string.Format(query,carteBancaire.BankCardId.ToString(), carteBancaire.Number.ToString(), carteBancaire.ExperationDate.ToShortDateString()
+                , carteBancaire.Cryctogramme, carteBancaire.TypeCard.CardTypeId, carteBancaire.Banque.BankId);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             try
@@ -87,8 +99,12 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+            }
         }
-        /***********************************************************************************************************/
         public static void Delete(int id)
         {
             SqlCommand cmd = new SqlCommand();
@@ -105,8 +121,12 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+            }
         }
-        /***************************************************************************************************************/
-   
+
     }
 }

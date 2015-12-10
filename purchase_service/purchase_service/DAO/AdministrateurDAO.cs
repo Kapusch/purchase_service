@@ -16,7 +16,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from ADMINISTRATEUR where ID_ADMINISTRATEUR={0}", id.ToString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd).FirstOrDefault();
+            var result = ExecuteReader(cmd).FirstOrDefault();
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         public static List<Administrateur> Search(string condition)
@@ -25,7 +28,10 @@ namespace purchase_service.DAO
             cmd.CommandText = string.Format("select * from ADMINISTRATEUR where {0}", condition);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
-            return ExecuteReader(cmd);
+            var result = ExecuteReader(cmd);
+            cmd.Dispose();
+            cmd = null;
+            return result;
         }
 
         private static List<Administrateur> ExecuteReader(SqlCommand cmd)
@@ -48,8 +54,10 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
-
             reader.Close();
+            reader.Dispose();
+            reader = null;
+            
             return result;
         }
 
@@ -68,6 +76,11 @@ namespace purchase_service.DAO
             {
                 throw (e);
             }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+            }
         }
 
         private static int GenerateId ()
@@ -84,6 +97,10 @@ namespace purchase_service.DAO
             }
 
             reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            cmd = null;
+            reader = null;
             return id;
         }
 
@@ -102,6 +119,11 @@ namespace purchase_service.DAO
             catch (Exception e)
             {
                 throw (e);
+            }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
             }
         }
     }

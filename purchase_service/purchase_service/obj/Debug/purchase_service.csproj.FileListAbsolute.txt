@@ -2,15 +2,14 @@ D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purch
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\bin\purchase_service.pdb
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
 D:\Travaux UBP\M2 Info\Architecture orientée service Web\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll.config
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.pdb
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll.config
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\bin\purchase_service.pdb
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.csprojResolveAssemblyReference.cache
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.csprojResolveAssemblyReference.cache
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll.config
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.dll
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\bin\purchase_service.pdb
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.dll
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_service\obj\Debug\purchase_service.pdb
