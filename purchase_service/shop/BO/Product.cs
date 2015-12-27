@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magasin.BO
 {
-    class Product
+    public class Product
     {
     }
 }

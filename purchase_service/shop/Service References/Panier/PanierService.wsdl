@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://entities.spring.ubp.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://ws.spring.ubp.com/" name="PanierService" targetNamespace="http://entities.spring.ubp.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://ws.spring.ubp.com/" location="http://gestionstock-serviceweb.rhcloud.com/gestionStock/Panier?wsdl=Panier.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="PanierServiceSoapBinding" type="ns1:Panier">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteItem">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="DeleteItem">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteItemResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTotal">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getTotal">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTotalResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addArticle">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addArticle">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addArticleResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSize">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getSize">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSizeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getItems">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getItems">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getItemsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PanierService">
+    <wsdl:port name="PanierPort" binding="tns:PanierServiceSoapBinding">
+      <soap:address location="http://gestionstock-serviceweb.rhcloud.com/gestionStock/Panier" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

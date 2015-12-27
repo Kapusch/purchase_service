@@ -31,13 +31,14 @@ namespace Magasin
 
         private DialogResult CheckIdentification()
         {
+            // permet l'authentification
             if (string.IsNullOrEmpty(tbLogin.Text) || string.IsNullOrWhiteSpace(tbLogin.Text))
                 return this.DialogResult = DialogResult.No;
 
             if (string.IsNullOrEmpty(tbPassword.Text) || string.IsNullOrWhiteSpace(tbPassword.Text))
                 return this.DialogResult = DialogResult.No;
 
-            string result = Service.GetService.PersonIdentification(tbLogin.Text, tbPassword.Text);
+            string result = Service.GetPaymentService.PersonIdentification(tbLogin.Text, tbPassword.Text);
            
             int idClient;
             if (!Int32.TryParse(result, out idClient))
@@ -60,6 +61,7 @@ namespace Magasin
                     return this.DialogResult = DialogResult.No;
                 }
             }
+            // avec les information récupérées, on créer une nouvelle instance du client
             CurrentClient.FillClient(CurrentClient.result);
 
             return this.DialogResult = DialogResult.Yes;
@@ -67,6 +69,7 @@ namespace Magasin
 
         private void tbPassword_KeyDown(object sender, KeyEventArgs e)
         {
+            //si on click si entrée, même effet que si on clique sur OK
             if (e.KeyCode == Keys.Enter)
                 btnOK_Click(sender, e);
         }

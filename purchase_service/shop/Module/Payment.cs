@@ -1,5 +1,6 @@
 ﻿using Magasin.BO;
 using Magasin.Module.Tools;
+using Magasin.VenteProduit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Magasin.Module
     public partial class Payment : Form
     {
         private Client currentClient;
+        public Dictionary<produit, int> Basket;
 
         public Payment(Client client)
         {
@@ -24,9 +26,11 @@ namespace Magasin.Module
 
         private void Payment_Load(object sender, EventArgs e)
         {
-            lblClientSold.Text = currentClient.sold.ToString();
+            // charge le panier, les cartes du client
+            Basket = MainMenu.Basket;
+            lblClientSold.Text = currentClient.sold.ToString()+"€";
 
-            var cards = Service.GetService.GetCarteBancaire(currentClient.clientId);
+            var cards = Service.GetPaymentService.GetCarteBancaire(currentClient.clientId);
             if (cards == null)
                 return;
             if (cards[0].Count<2)
@@ -43,10 +47,14 @@ namespace Magasin.Module
                 cardsNumbers.Add(card[0]);
             }
             cbCards.DataSource = cardsNumbers;
+
+            lbOrder.Items.AddRange(Basket.Select(p => p.Key.designation).ToArray());
+            lblPrice.Text = Basket.Sum(p => p.Value*p.Key.prix).ToString();
         }
 
         private void btnReload_Click(object sender, EventArgs e)
         {
+            // permet de recharger son compte
             int addMonney;
             if (!(string.IsNullOrEmpty(tbReload.Text) || string.IsNullOrWhiteSpace(tbReload.Text)))
             {
@@ -59,7 +67,7 @@ namespace Magasin.Module
                 {
                     if (addMonney < 1)
                         return;
-                    string result = Service.GetService.CreditTransaction(currentClient.clientId, addMonney);
+                    string result = Service.GetPaymentService.CreditTransaction(currentClient.clientId, Convert.ToDouble(addMonney));
                     if (!(result == "OK"))
                         using (var info = new InformationBox(result))
                         {
@@ -76,7 +84,8 @@ namespace Magasin.Module
 
         private void RefreshScreen()
         {
-            var result = Service.GetService.GetClient(currentClient.clientId);
+            // actualise la page avec les nouvelles informations
+            var result = Service.GetPaymentService.GetClient(currentClient.clientId);
 
             if (string.IsNullOrEmpty(result[1])||string.IsNullOrWhiteSpace(result[1]))
                 using (var info = new InformationBox(result[0]))
@@ -86,7 +95,7 @@ namespace Magasin.Module
                     return;
                 }
             currentClient.FillClient(result);
-            lblClientSold.Text = currentClient.sold.ToString();
+            lblClientSold.Text = currentClient.sold.ToString()+"€";
             cbCards.SelectedIndex = 0;
         }
 
@@ -94,6 +103,32 @@ namespace Magasin.Module
         {
             if (e.KeyCode == Keys.Enter)
                 btnReload_Click(sender, e);
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            // permet de payer
+            if (string.IsNullOrEmpty(lblPrice.Text) || string.IsNullOrWhiteSpace(lblPrice.Text))
+                return;
+
+            if (Convert.ToDouble(lblPrice.Text) < currentClient.sold)
+            {
+                var result = Service.GetPaymentService.DebitTransaction(currentClient.clientId, Convert.ToDouble(lblPrice.Text));
+                using (var info = new InformationBox(result))
+                {
+                    info.ShowDialog();
+                }
+                RefreshScreen();
+                lbOrder.Items.Clear();
+                lblPrice.Text = string.Empty;
+                Basket = null;
+            }
+            else
+                using (var info = new InformationBox("Veuillez recharger, vous n'avez pas assez d'argent"))
+                {
+                    info.ShowDialog();
+                }
+
         }
 
     }

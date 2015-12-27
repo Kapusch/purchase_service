@@ -12,7 +12,6 @@ C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\bin\Deb
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\bin\Debug\Magasin.exe
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\bin\Debug\Magasin.pdb
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.MainMenu.resources
-C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.Module.Tools.DisplayProduct.resources
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.Properties.Resources.resources
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Shop.csproj.GenerateResource.Cache
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.exe
@@ -25,3 +24,4 @@ C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Deb
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.LoginBox.resources
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.Module.Tools.SignIn.resources
 C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Magasin.Module.Tools.ClientInformation.resources
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache

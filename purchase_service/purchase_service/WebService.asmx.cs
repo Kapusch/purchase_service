@@ -164,7 +164,7 @@ namespace purchase_service
         
 
         [WebMethod(Description = "Create and register an account for a client.")]
-        public string NewUser(string login, string pwdClient, string nameClient, string firstNameClient, int soldClient)
+        public string NewUser(string login, string pwdClient, string nameClient, string firstNameClient, double soldClient)
         {
             String msg = string.Empty;
             try
@@ -247,7 +247,7 @@ namespace purchase_service
         }
 
         [WebMethod(Description = "Enables to debit his own client account.")]
-        public string DebitTransaction(int idClient, int amount)
+        public string DebitTransaction(int idClient, double amount)
         {
             String msg = string.Empty;
             try
@@ -266,7 +266,7 @@ namespace purchase_service
                         newHistorique = new Historique(clientDB, amount, clientDB.Sold);
                         ClientDAO.Update(clientDB);
                         HistoriqueDAO.Insert(newHistorique);
-                        msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB.Sold - amount) + "€";
+                        msg = "Le compte de " + clientDB.Name + " " + clientDB.FirstName + " vient d'être débité du montant suivant : " + amount + "€. Solde actuel : " + (clientDB.Sold) + "€";
                     }
                     else
                     {
@@ -284,7 +284,7 @@ namespace purchase_service
 
 
         [WebMethod(Description = "Enables to credit his own client account.")]
-        public string CreditTransaction(int idClient, int amount)
+        public string CreditTransaction(int idClient, double amount)
         {
             String msg = string.Empty;
             try

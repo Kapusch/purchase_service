@@ -10,7 +10,7 @@ namespace Magasin
     {
         private static PurchaseService.WebServiceSoapClient service;
 
-        public static PurchaseService.WebServiceSoapClient GetService
+        public static PurchaseService.WebServiceSoapClient GetPaymentService
         {
             get
             {
@@ -19,6 +19,36 @@ namespace Magasin
                     service = new PurchaseService.WebServiceSoapClient();
                 }
                 return service;
+            }
+        }
+
+        private static VenteProduit.VenteProduitClient servicePurchase;
+
+        public static VenteProduit.VenteProduitClient GetVenteProduitService
+        {
+            get
+            {
+                if (servicePurchase == null)
+                {
+                    servicePurchase=new VenteProduit.VenteProduitClient();
+                }
+
+                return servicePurchase;
+            }
+        }
+
+        private static Panier.PanierClient servicePanier;
+
+        public static Panier.PanierClient GetBasketService
+        {
+            get
+            {
+                if (servicePanier == null)
+                {
+                    servicePanier = new Panier.PanierClient();
+                }
+
+                return servicePanier;
             }
         }
     }

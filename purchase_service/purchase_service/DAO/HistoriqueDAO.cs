@@ -47,7 +47,7 @@ namespace purchase_service.DAO
                 {
 
                     Historique currentHistorique = new Historique(ClientDAO.Read(Convert.ToInt32(reader["ID_CLIENT"]))
-                        , Convert.ToInt32(reader["MONTANT_TRANSACTION"]), Convert.ToInt32(reader["SOLDE_APRES_TRANSACTION"])
+                        , Convert.ToDouble(reader["MONTANT_TRANSACTION"]), Convert.ToDouble(reader["SOLDE_APRES_TRANSACTION"])
                         , DateTime.Parse(reader["DATE_TRANSACTION"].ToString()));
                     result.Add(currentHistorique);
                 }
@@ -67,8 +67,8 @@ namespace purchase_service.DAO
         {
             SqlCommand cmd = new SqlCommand();
             const string query = "INSERT INTO HISTORIQUE VALUES ('{0}','{1}','{2}','{3}')";
-            cmd.CommandText = string.Format(query, historique.ClientId.ClientId.ToString(), historique.TransactionSum.ToString()
-                , historique.SoldAfterTransaction.ToString(), DateTime.Now.ToShortDateString());
+            cmd.CommandText = string.Format(query, historique.ClientId.ClientId.ToString(), historique.TransactionSum.ToString().Replace(",", ".")
+                , historique.SoldAfterTransaction.ToString().Replace(",", "."), DateTime.Now.ToShortDateString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             try

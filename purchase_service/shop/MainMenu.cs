@@ -1,6 +1,7 @@
 ﻿using Magasin.BO;
 using Magasin.Module;
 using Magasin.Module.Tools;
+using Magasin.VenteProduit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace Magasin
         private Payment pagePayment;
         private Purchase pagePurchase;
         private List<CartesBancaire> cartes;
+        public  static Dictionary<produit, int> Basket;
 
         private LoginBox identification;
         private SignIn inscription;
@@ -108,6 +110,7 @@ namespace Magasin
 
         private void pbPurchase_MouseEnter(object sender, EventArgs e)
         {
+            // permet d'effet de grossissement de l'icône
             BiggerEffect(pbPurchase, SR.icone_achat_bigger);
         }
 
@@ -123,14 +126,20 @@ namespace Magasin
 
         private void pbPurchase_Click(object sender, EventArgs e)
         {
+            // instancie la page purchase et de la mettre au 1er plan
             PagePurchase.ShowDialog();
             PagePurchase.Focus();
         }
 
         private void pbPayment_Click(object sender, EventArgs e)
         {
+            // on vérifie qu'un utilisateur est connecté puis on instancie la page demandée
             if (CurrentClient == null)
-                return;
+                using (var info = new InformationBox("Veuillez tout d'abord vous connecter s'il vous plaît"))
+                {
+                    info.ShowDialog();
+                    return;
+                }
 
             PagePayment.ShowDialog();
             PagePayment.Focus();
@@ -144,6 +153,7 @@ namespace Magasin
 
         private void llblConnected_Click(object sender, EventArgs e)
         {
+            // on instancie la fenêtre d'identification et si elle nous a retourné un client, on rend accessible son profil
             using (Identification)
             {
                 if (!(Identification.ShowDialog() == DialogResult.No))
@@ -160,6 +170,7 @@ namespace Magasin
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            // on charge les icônes lorsque l'on charge le menu
             pbDelivery.Image = SR.icone_livraison;
             pbPayment.Image = SR.icone_payment;
             pbPurchase.Image = SR.icone_achat;
@@ -167,6 +178,7 @@ namespace Magasin
 
         private void MainMenu_MouseEnter(object sender, EventArgs e)
         {
+            //on modifie la zone des icônes pour qu'elles puissent grossir
             const int sizeInit = 100;
             if (pbPurchase.Width != 100)
             {
@@ -190,6 +202,7 @@ namespace Magasin
 
         private void lblClientProfil_Click(object sender, EventArgs e)
         {
+            //si un client est connecté, on peut instancier la fenêtre profil
             if (CurrentClient == null)
                 return;
 
@@ -201,6 +214,7 @@ namespace Magasin
 
         private void llblSignIn_Click(object sender, EventArgs e)
         {
+            // permet la création d'un profil
             using (Inscription)
             {
                 if (Inscription.ShowDialog()==DialogResult.OK)
@@ -218,6 +232,7 @@ namespace Magasin
 
         private void BiggerEffect (PictureBox picture, Bitmap newImage)
         {
+            // augmente la taille des zones d'image 
             if (picture.Width != size)
             {
                 picture.Width = size;
@@ -228,20 +243,24 @@ namespace Magasin
 
         private void ClosePageDelivery(object sender, FormClosingEventArgs e)
         {
+            // on libère les ressources
             pageDelivery.Dispose();
             pageDelivery = null;
         }
 
         private void ClosePagePurchase(object sender, FormClosingEventArgs e)
         {
+            Basket = pagePurchase.Basket;
             pagePurchase.Dispose();
             pagePurchase = null;
         }
 
         private void ClosePagePayment(object sender, FormClosingEventArgs e)
         {
+            // on libère les ressources et on vide le panier
             pagePayment.Dispose();
             pagePayment = null;
+            Basket = null;
         }
 
         private void CloseLoginBox(object sender, FormClosingEventArgs e)

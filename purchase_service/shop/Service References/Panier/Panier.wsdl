@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ws.spring.ubp.com/" name="Panier" targetNamespace="http://ws.spring.ubp.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://ws.spring.ubp.com/" elementFormDefault="unqualified" targetNamespace="http://ws.spring.ubp.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="DeleteItem" type="tns:DeleteItem" />
+      <xs:element name="DeleteItemResponse" type="tns:DeleteItemResponse" />
+      <xs:element name="addArticle" type="tns:addArticle" />
+      <xs:element name="addArticleResponse" type="tns:addArticleResponse" />
+      <xs:element name="client" type="tns:client" />
+      <xs:element name="commande" type="tns:commande" />
+      <xs:element name="getItems" type="tns:getItems" />
+      <xs:element name="getItemsResponse" type="tns:getItemsResponse" />
+      <xs:element name="getSize" type="tns:getSize" />
+      <xs:element name="getSizeResponse" type="tns:getSizeResponse" />
+      <xs:element name="getTotal" type="tns:getTotal" />
+      <xs:element name="getTotalResponse" type="tns:getTotalResponse" />
+      <xs:element name="ligneDeCommande" type="tns:ligneDeCommande" />
+      <xs:element name="produit" type="tns:produit" />
+      <xs:complexType name="DeleteItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idProduit" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteItemResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getTotal">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getTotalResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addArticle">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="produit" type="tns:produit" />
+          <xs:element name="quantite" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="produit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idProduit" type="xs:long" />
+          <xs:element minOccurs="0" name="designation" type="xs:string" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element name="prix" type="xs:double" />
+          <xs:element name="quantite" type="xs:int" />
+          <xs:element name="selected" type="xs:boolean" />
+          <xs:element minOccurs="0" name="photo" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addArticleResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getSize">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getSizeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getItems">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getItemsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:ligneDeCommande" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ligneDeCommande">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="commande" type="tns:commande" />
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element name="prix" type="xs:double" />
+          <xs:element minOccurs="0" name="produit" type="tns:produit" />
+          <xs:element name="quantite" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commande">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="client" type="tns:client" />
+          <xs:element minOccurs="0" name="dateCommande" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="idCommande" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="items" nillable="true" type="tns:ligneDeCommande" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idClient" type="xs:long" />
+          <xs:element minOccurs="0" name="nom" type="xs:string" />
+          <xs:element minOccurs="0" name="prenom" type="xs:string" />
+          <xs:element minOccurs="0" name="adresse" type="xs:string" />
+          <xs:element minOccurs="0" name="tel" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="addArticleResponse">
+    <wsdl:part name="parameters" element="ns1:addArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSize">
+    <wsdl:part name="parameters" element="ns1:getSize" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItem">
+    <wsdl:part name="parameters" element="ns1:DeleteItem" />
+  </wsdl:message>
+  <wsdl:message name="getTotalResponse">
+    <wsdl:part name="parameters" element="ns1:getTotalResponse" />
+  </wsdl:message>
+  <wsdl:message name="getItems">
+    <wsdl:part name="parameters" element="ns1:getItems" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemResponse">
+    <wsdl:part name="parameters" element="ns1:DeleteItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSizeResponse">
+    <wsdl:part name="parameters" element="ns1:getSizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="addArticle">
+    <wsdl:part name="parameters" element="ns1:addArticle" />
+  </wsdl:message>
+  <wsdl:message name="getTotal">
+    <wsdl:part name="parameters" element="ns1:getTotal" />
+  </wsdl:message>
+  <wsdl:message name="getItemsResponse">
+    <wsdl:part name="parameters" element="ns1:getItemsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Panier">
+    <wsdl:operation name="DeleteItem">
+      <wsdl:input name="DeleteItem" message="ns1:DeleteItem" />
+      <wsdl:output name="DeleteItemResponse" message="ns1:DeleteItemResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTotal">
+      <wsdl:input name="getTotal" message="ns1:getTotal" />
+      <wsdl:output name="getTotalResponse" message="ns1:getTotalResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addArticle">
+      <wsdl:input name="addArticle" message="ns1:addArticle" />
+      <wsdl:output name="addArticleResponse" message="ns1:addArticleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSize">
+      <wsdl:input name="getSize" message="ns1:getSize" />
+      <wsdl:output name="getSizeResponse" message="ns1:getSizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getItems">
+      <wsdl:input name="getItems" message="ns1:getItems" />
+      <wsdl:output name="getItemsResponse" message="ns1:getItemsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

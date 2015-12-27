@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.gbInfo = new System.Windows.Forms.GroupBox();
+            this.lblCurrentCard = new System.Windows.Forms.Label();
+            this.cbCards = new System.Windows.Forms.ComboBox();
             this.lblReload = new System.Windows.Forms.Label();
             this.lblDevise3 = new System.Windows.Forms.Label();
             this.tbReload = new System.Windows.Forms.TextBox();
             this.btnReload = new System.Windows.Forms.Button();
-            this.lblDevise2 = new System.Windows.Forms.Label();
             this.lblClientSold = new System.Windows.Forms.Label();
             this.lblCurrentSold = new System.Windows.Forms.Label();
             this.gbOrder = new System.Windows.Forms.GroupBox();
@@ -44,8 +45,6 @@
             this.lbOrder = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.cbCards = new System.Windows.Forms.ComboBox();
-            this.lblCurrentCard = new System.Windows.Forms.Label();
             this.gbInfo.SuspendLayout();
             this.gbOrder.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +57,6 @@
             this.gbInfo.Controls.Add(this.lblDevise3);
             this.gbInfo.Controls.Add(this.tbReload);
             this.gbInfo.Controls.Add(this.btnReload);
-            this.gbInfo.Controls.Add(this.lblDevise2);
             this.gbInfo.Controls.Add(this.lblClientSold);
             this.gbInfo.Controls.Add(this.lblCurrentSold);
             this.gbInfo.Location = new System.Drawing.Point(12, 12);
@@ -67,6 +65,23 @@
             this.gbInfo.TabIndex = 0;
             this.gbInfo.TabStop = false;
             this.gbInfo.Text = "Informations";
+            // 
+            // lblCurrentCard
+            // 
+            this.lblCurrentCard.AutoSize = true;
+            this.lblCurrentCard.Location = new System.Drawing.Point(18, 190);
+            this.lblCurrentCard.Name = "lblCurrentCard";
+            this.lblCurrentCard.Size = new System.Drawing.Size(76, 13);
+            this.lblCurrentCard.TabIndex = 8;
+            this.lblCurrentCard.Text = "Carte débitée :";
+            // 
+            // cbCards
+            // 
+            this.cbCards.FormattingEnabled = true;
+            this.cbCards.Location = new System.Drawing.Point(18, 216);
+            this.cbCards.Name = "cbCards";
+            this.cbCards.Size = new System.Drawing.Size(121, 21);
+            this.cbCards.TabIndex = 7;
             // 
             // lblReload
             // 
@@ -103,15 +118,6 @@
             this.btnReload.Text = "Recharger";
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
-            // 
-            // lblDevise2
-            // 
-            this.lblDevise2.AutoSize = true;
-            this.lblDevise2.Location = new System.Drawing.Point(126, 159);
-            this.lblDevise2.Name = "lblDevise2";
-            this.lblDevise2.Size = new System.Drawing.Size(13, 13);
-            this.lblDevise2.TabIndex = 2;
-            this.lblDevise2.Text = "€";
             // 
             // lblClientSold
             // 
@@ -152,6 +158,7 @@
             this.btnPay.TabIndex = 8;
             this.btnPay.Text = "Payer";
             this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // lblDevise
             // 
@@ -208,23 +215,6 @@
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // cbCards
-            // 
-            this.cbCards.FormattingEnabled = true;
-            this.cbCards.Location = new System.Drawing.Point(18, 216);
-            this.cbCards.Name = "cbCards";
-            this.cbCards.Size = new System.Drawing.Size(121, 21);
-            this.cbCards.TabIndex = 7;
-            // 
-            // lblCurrentCard
-            // 
-            this.lblCurrentCard.AutoSize = true;
-            this.lblCurrentCard.Location = new System.Drawing.Point(18, 190);
-            this.lblCurrentCard.Name = "lblCurrentCard";
-            this.lblCurrentCard.Size = new System.Drawing.Size(76, 13);
-            this.lblCurrentCard.TabIndex = 8;
-            this.lblCurrentCard.Text = "Carte débitée :";
-            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,7 +244,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.ListBox lbOrder;
         private System.Windows.Forms.Label lblDevise;
-        private System.Windows.Forms.Label lblDevise2;
         private System.Windows.Forms.Label lblClientSold;
         private System.Windows.Forms.Label lblCurrentSold;
         private System.Windows.Forms.Label lblReload;

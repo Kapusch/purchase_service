@@ -57,7 +57,7 @@ namespace purchase_service.DAO
                 {
                     Client currentClient = new Client(Convert.ToInt32(reader["ID_CLIENT"]), reader["LOGIN_CLIENT"].ToString(), reader["PASSWORD"].ToString()
                         ,reader["NOM"].ToString(), reader["PRENOM"].ToString(), DateTime.Parse(reader["DATE_INSCRIPTION"].ToString())
-                        ,Convert.ToInt32(reader["SOLDE"]), (Convert.ToInt32(reader["IS_DELETE"]) == 1));
+                        , Convert.ToDouble(reader["SOLDE"]), (Convert.ToInt32(reader["IS_DELETE"]) == 1));
                     result.Add(currentClient);
                 }
             }
@@ -78,7 +78,7 @@ namespace purchase_service.DAO
         {
             SqlCommand cmd = new SqlCommand();
             const string query = "UPDATE CLIENT set LOGIN_CLIENT = '{0}', PASSWORD='{1}', NOM='{2}', PRENOM='{3}', SOLDE='{4}', IS_DELETE='{5}' where ID_CLIENT='{6}'";
-            cmd.CommandText = string.Format(query, client.ClientLogin, client.Password, client.Name, client.FirstName, client.Sold.ToString(), client.IsDelete ? "1" : "0", client.ClientId.ToString());
+            cmd.CommandText = string.Format(query, client.ClientLogin, client.Password, client.Name, client.FirstName, client.Sold.ToString().Replace(",","."), client.IsDelete ? "1" : "0", client.ClientId.ToString());
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             try
@@ -122,7 +122,7 @@ namespace purchase_service.DAO
             SqlCommand cmd = new SqlCommand();
             const string query = "INSERT INTO CLIENT VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')";
             cmd.CommandText = string.Format(query, GenerateId().ToString(), client.ClientLogin, client.Password, client.Name
-                , client.FirstName, DateTime.Now.ToShortDateString(), client.Sold.ToString(), client.IsDelete ? "1" : "0");
+                , client.FirstName, DateTime.Now.ToShortDateString(), client.Sold.ToString().Replace(",", "."), client.IsDelete ? "1" : "0");
             cmd.CommandType = CommandType.Text;
             cmd.Connection = BDDConnexion.Conn;
             try

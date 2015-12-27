@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.spring.ubp.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="VenteProduitServiceImplService" targetNamespace="http://ws.spring.ubp.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://ws.spring.ubp.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="AjouterCategorie" type="tns:AjouterCategorie" />
+      <xs:element name="AjouterCategorieResponse" type="tns:AjouterCategorieResponse" />
+      <xs:element name="AjouterClient" type="tns:AjouterClient" />
+      <xs:element name="AjouterClientResponse" type="tns:AjouterClientResponse" />
+      <xs:element name="AjouterProduit" type="tns:AjouterProduit" />
+      <xs:element name="AjouterProduitResponse" type="tns:AjouterProduitResponse" />
+      <xs:element name="ConsulterPanier" type="tns:ConsulterPanier" />
+      <xs:element name="ConsulterPanierResponse" type="tns:ConsulterPanierResponse" />
+      <xs:element name="EnregistrerCommande" type="tns:EnregistrerCommande" />
+      <xs:element name="EnregistrerCommandeResponse" type="tns:EnregistrerCommandeResponse" />
+      <xs:element name="ListeDeProduits" type="tns:ListeDeProduits" />
+      <xs:element name="ListeDeProduitsResponse" type="tns:ListeDeProduitsResponse" />
+      <xs:element name="ListeDesClients" type="tns:ListeDesClients" />
+      <xs:element name="ListeDesClientsResponse" type="tns:ListeDesClientsResponse" />
+      <xs:element name="ListerProduitParCategorie" type="tns:ListerProduitParCategorie" />
+      <xs:element name="ListerProduitParCategorieResponse" type="tns:ListerProduitParCategorieResponse" />
+      <xs:element name="ListerProduitParMotCle" type="tns:ListerProduitParMotCle" />
+      <xs:element name="ListerProduitParMotCleResponse" type="tns:ListerProduitParMotCleResponse" />
+      <xs:element name="ModifierCategorie" type="tns:ModifierCategorie" />
+      <xs:element name="ModifierCategorieResponse" type="tns:ModifierCategorieResponse" />
+      <xs:element name="ModifierClient" type="tns:ModifierClient" />
+      <xs:element name="ModifierClientResponse" type="tns:ModifierClientResponse" />
+      <xs:element name="ModifierProduit" type="tns:ModifierProduit" />
+      <xs:element name="ModifierProduitResponse" type="tns:ModifierProduitResponse" />
+      <xs:element name="RechercherClientParId" type="tns:RechercherClientParId" />
+      <xs:element name="RechercherClientParIdResponse" type="tns:RechercherClientParIdResponse" />
+      <xs:element name="RechercherProduitParId" type="tns:RechercherProduitParId" />
+      <xs:element name="RechercherProduitParIdResponse" type="tns:RechercherProduitParIdResponse" />
+      <xs:element name="SupprimerCategorie" type="tns:SupprimerCategorie" />
+      <xs:element name="SupprimerCategorieResponse" type="tns:SupprimerCategorieResponse" />
+      <xs:element name="SupprimerProduitParId" type="tns:SupprimerProduitParId" />
+      <xs:element name="SupprimerProduitParIdResponse" type="tns:SupprimerProduitParIdResponse" />
+      <xs:element name="categorie" type="tns:categorie" />
+      <xs:element name="client" type="tns:client" />
+      <xs:element name="commande" type="tns:commande" />
+      <xs:element name="ligneDeCommande" type="tns:ligneDeCommande" />
+      <xs:element name="panier" type="tns:panier" />
+      <xs:element name="produit" type="tns:produit" />
+      <xs:complexType name="ListerProduitParCategorie">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nomCategorie" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListerProduitParCategorieResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:produit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="produit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idProduit" type="xs:long" />
+          <xs:element minOccurs="0" name="designation" type="xs:string" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element name="prix" type="xs:double" />
+          <xs:element name="quantite" type="xs:int" />
+          <xs:element name="selected" type="xs:boolean" />
+          <xs:element minOccurs="0" name="photo" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListeDesClients">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ListeDesClientsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:client" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idClient" type="xs:long" />
+          <xs:element minOccurs="0" name="nom" type="xs:string" />
+          <xs:element minOccurs="0" name="prenom" type="xs:string" />
+          <xs:element minOccurs="0" name="adresse" type="xs:string" />
+          <xs:element minOccurs="0" name="tel" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RechercherProduitParId">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RechercherProduitParIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:produit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListerProduitParMotCle">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MotCle" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListerProduitParMotCleResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:produit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListeDeProduits">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ListeDeProduitsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:produit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ModifierCategorie">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="categorie" type="tns:categorie" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="categorie">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idCategorie" type="xs:long" />
+          <xs:element minOccurs="0" name="nom" type="xs:string" />
+          <xs:element minOccurs="0" name="photo" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ModifierCategorieResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="AjouterClient">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="client" type="tns:client" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AjouterClientResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="SupprimerCategorie">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idCategorie" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SupprimerCategorieResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="AjouterProduit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="produit" type="tns:produit" />
+          <xs:element minOccurs="0" name="idCategorie" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AjouterProduitResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="RechercherClientParId">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idClient" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RechercherClientParIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:client" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AjouterCategorie">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="categorie" type="tns:categorie" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AjouterCategorieResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ModifierClient">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="client" type="tns:client" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ModifierClientResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="EnregistrerCommande">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Client" type="tns:client" />
+          <xs:element minOccurs="0" name="panier" type="tns:panier" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="panier">
+        <xs:sequence>
+          <xs:element name="items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="xs:long" />
+                      <xs:element minOccurs="0" name="value" type="tns:ligneDeCommande" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ligneDeCommande">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="commande" type="tns:commande" />
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element name="prix" type="xs:double" />
+          <xs:element minOccurs="0" name="produit" type="tns:produit" />
+          <xs:element name="quantite" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commande">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="client" type="tns:client" />
+          <xs:element minOccurs="0" name="dateCommande" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="idCommande" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="items" nillable="true" type="tns:ligneDeCommande" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EnregistrerCommandeResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ModifierProduit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="produit" type="tns:produit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ModifierProduitResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="SupprimerProduitParId">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SupprimerProduitParIdResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ConsulterPanier">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idclient" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConsulterPanierResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:ligneDeCommande" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ModifierProduit">
+    <wsdl:part name="parameters" element="tns:ModifierProduit" />
+  </wsdl:message>
+  <wsdl:message name="AjouterClient">
+    <wsdl:part name="parameters" element="tns:AjouterClient" />
+  </wsdl:message>
+  <wsdl:message name="AjouterClientResponse">
+    <wsdl:part name="parameters" element="tns:AjouterClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListeDesClients">
+    <wsdl:part name="parameters" element="tns:ListeDesClients" />
+  </wsdl:message>
+  <wsdl:message name="SupprimerCategorie">
+    <wsdl:part name="parameters" element="tns:SupprimerCategorie" />
+  </wsdl:message>
+  <wsdl:message name="ListerProduitParMotCle">
+    <wsdl:part name="parameters" element="tns:ListerProduitParMotCle" />
+  </wsdl:message>
+  <wsdl:message name="EnregistrerCommande">
+    <wsdl:part name="parameters" element="tns:EnregistrerCommande" />
+  </wsdl:message>
+  <wsdl:message name="RechercherClientParId">
+    <wsdl:part name="parameters" element="tns:RechercherClientParId" />
+  </wsdl:message>
+  <wsdl:message name="ListeDeProduitsResponse">
+    <wsdl:part name="parameters" element="tns:ListeDeProduitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsulterPanierResponse">
+    <wsdl:part name="parameters" element="tns:ConsulterPanierResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListerProduitParCategorieResponse">
+    <wsdl:part name="parameters" element="tns:ListerProduitParCategorieResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListerProduitParCategorie">
+    <wsdl:part name="parameters" element="tns:ListerProduitParCategorie" />
+  </wsdl:message>
+  <wsdl:message name="ModifierCategorieResponse">
+    <wsdl:part name="parameters" element="tns:ModifierCategorieResponse" />
+  </wsdl:message>
+  <wsdl:message name="RechercherProduitParId">
+    <wsdl:part name="parameters" element="tns:RechercherProduitParId" />
+  </wsdl:message>
+  <wsdl:message name="AjouterProduit">
+    <wsdl:part name="parameters" element="tns:AjouterProduit" />
+  </wsdl:message>
+  <wsdl:message name="ConsulterPanier">
+    <wsdl:part name="parameters" element="tns:ConsulterPanier" />
+  </wsdl:message>
+  <wsdl:message name="SupprimerCategorieResponse">
+    <wsdl:part name="parameters" element="tns:SupprimerCategorieResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListeDesClientsResponse">
+    <wsdl:part name="parameters" element="tns:ListeDesClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifierClientResponse">
+    <wsdl:part name="parameters" element="tns:ModifierClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifierCategorie">
+    <wsdl:part name="parameters" element="tns:ModifierCategorie" />
+  </wsdl:message>
+  <wsdl:message name="SupprimerProduitParIdResponse">
+    <wsdl:part name="parameters" element="tns:SupprimerProduitParIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifierProduitResponse">
+    <wsdl:part name="parameters" element="tns:ModifierProduitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifierClient">
+    <wsdl:part name="parameters" element="tns:ModifierClient" />
+  </wsdl:message>
+  <wsdl:message name="EnregistrerCommandeResponse">
+    <wsdl:part name="parameters" element="tns:EnregistrerCommandeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListeDeProduits">
+    <wsdl:part name="parameters" element="tns:ListeDeProduits" />
+  </wsdl:message>
+  <wsdl:message name="AjouterCategorieResponse">
+    <wsdl:part name="parameters" element="tns:AjouterCategorieResponse" />
+  </wsdl:message>
+  <wsdl:message name="AjouterProduitResponse">
+    <wsdl:part name="parameters" element="tns:AjouterProduitResponse" />
+  </wsdl:message>
+  <wsdl:message name="SupprimerProduitParId">
+    <wsdl:part name="parameters" element="tns:SupprimerProduitParId" />
+  </wsdl:message>
+  <wsdl:message name="RechercherClientParIdResponse">
+    <wsdl:part name="parameters" element="tns:RechercherClientParIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="AjouterCategorie">
+    <wsdl:part name="parameters" element="tns:AjouterCategorie" />
+  </wsdl:message>
+  <wsdl:message name="ListerProduitParMotCleResponse">
+    <wsdl:part name="parameters" element="tns:ListerProduitParMotCleResponse" />
+  </wsdl:message>
+  <wsdl:message name="RechercherProduitParIdResponse">
+    <wsdl:part name="parameters" element="tns:RechercherProduitParIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="VenteProduit">
+    <wsdl:operation name="ListerProduitParCategorie">
+      <wsdl:input name="ListerProduitParCategorie" message="tns:ListerProduitParCategorie" />
+      <wsdl:output name="ListerProduitParCategorieResponse" message="tns:ListerProduitParCategorieResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ListeDesClients">
+      <wsdl:input name="ListeDesClients" message="tns:ListeDesClients" />
+      <wsdl:output name="ListeDesClientsResponse" message="tns:ListeDesClientsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RechercherProduitParId">
+      <wsdl:input name="RechercherProduitParId" message="tns:RechercherProduitParId" />
+      <wsdl:output name="RechercherProduitParIdResponse" message="tns:RechercherProduitParIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ListerProduitParMotCle">
+      <wsdl:input name="ListerProduitParMotCle" message="tns:ListerProduitParMotCle" />
+      <wsdl:output name="ListerProduitParMotCleResponse" message="tns:ListerProduitParMotCleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ListeDeProduits">
+      <wsdl:input name="ListeDeProduits" message="tns:ListeDeProduits" />
+      <wsdl:output name="ListeDeProduitsResponse" message="tns:ListeDeProduitsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifierCategorie">
+      <wsdl:input name="ModifierCategorie" message="tns:ModifierCategorie" />
+      <wsdl:output name="ModifierCategorieResponse" message="tns:ModifierCategorieResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AjouterClient">
+      <wsdl:input name="AjouterClient" message="tns:AjouterClient" />
+      <wsdl:output name="AjouterClientResponse" message="tns:AjouterClientResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SupprimerCategorie">
+      <wsdl:input name="SupprimerCategorie" message="tns:SupprimerCategorie" />
+      <wsdl:output name="SupprimerCategorieResponse" message="tns:SupprimerCategorieResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AjouterProduit">
+      <wsdl:input name="AjouterProduit" message="tns:AjouterProduit" />
+      <wsdl:output name="AjouterProduitResponse" message="tns:AjouterProduitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RechercherClientParId">
+      <wsdl:input name="RechercherClientParId" message="tns:RechercherClientParId" />
+      <wsdl:output name="RechercherClientParIdResponse" message="tns:RechercherClientParIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AjouterCategorie">
+      <wsdl:input name="AjouterCategorie" message="tns:AjouterCategorie" />
+      <wsdl:output name="AjouterCategorieResponse" message="tns:AjouterCategorieResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifierClient">
+      <wsdl:input name="ModifierClient" message="tns:ModifierClient" />
+      <wsdl:output name="ModifierClientResponse" message="tns:ModifierClientResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EnregistrerCommande">
+      <wsdl:input name="EnregistrerCommande" message="tns:EnregistrerCommande" />
+      <wsdl:output name="EnregistrerCommandeResponse" message="tns:EnregistrerCommandeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifierProduit">
+      <wsdl:input name="ModifierProduit" message="tns:ModifierProduit" />
+      <wsdl:output name="ModifierProduitResponse" message="tns:ModifierProduitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SupprimerProduitParId">
+      <wsdl:input name="SupprimerProduitParId" message="tns:SupprimerProduitParId" />
+      <wsdl:output name="SupprimerProduitParIdResponse" message="tns:SupprimerProduitParIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsulterPanier">
+      <wsdl:input name="ConsulterPanier" message="tns:ConsulterPanier" />
+      <wsdl:output name="ConsulterPanierResponse" message="tns:ConsulterPanierResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VenteProduitServiceImplServiceSoapBinding" type="tns:VenteProduit">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListerProduitParCategorie">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ListerProduitParCategorie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ListerProduitParCategorieResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListeDesClients">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ListeDesClients">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ListeDesClientsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RechercherProduitParId">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="RechercherProduitParId">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RechercherProduitParIdResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListerProduitParMotCle">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ListerProduitParMotCle">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ListerProduitParMotCleResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifierCategorie">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ModifierCategorie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ModifierCategorieResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListeDeProduits">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ListeDeProduits">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ListeDeProduitsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AjouterClient">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="AjouterClient">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AjouterClientResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AjouterProduit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="AjouterProduit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AjouterProduitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupprimerCategorie">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="SupprimerCategorie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SupprimerCategorieResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RechercherClientParId">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="RechercherClientParId">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RechercherClientParIdResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AjouterCategorie">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="AjouterCategorie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AjouterCategorieResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifierClient">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ModifierClient">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ModifierClientResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnregistrerCommande">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="EnregistrerCommande">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EnregistrerCommandeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupprimerProduitParId">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="SupprimerProduitParId">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SupprimerProduitParIdResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifierProduit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ModifierProduit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ModifierProduitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsulterPanier">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ConsulterPanier">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ConsulterPanierResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VenteProduitServiceImplService">
+    <wsdl:port name="VenteProduitServiceImplPort" binding="tns:VenteProduitServiceImplServiceSoapBinding">
+      <soap:address location="http://gestionstock-serviceweb.rhcloud.com/gestionStock/VenteProduit" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

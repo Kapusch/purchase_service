@@ -11,9 +11,9 @@ namespace purchase_service.BO
 
         private Client client;
 
-        private int transactionSum;
+        private double transactionSum;
 
-        private int soldAfterTransaction;
+        private double soldAfterTransaction;
 
         private DateTime transactionDate;
         
@@ -23,9 +23,9 @@ namespace purchase_service.BO
 
         public Client ClientId { get { return client; } set { client = value; } }
 
-        public int TransactionSum { get { return transactionSum; } set { transactionSum = value; } }
+        public double TransactionSum { get { return transactionSum; } set { transactionSum = value; } }
 
-        public int SoldAfterTransaction { get { return soldAfterTransaction; } set { soldAfterTransaction = value; } }
+        public double SoldAfterTransaction { get { return soldAfterTransaction; } set { soldAfterTransaction = value; } }
 
         public DateTime TransactionDate { get { return transactionDate; } }
 
@@ -33,14 +33,14 @@ namespace purchase_service.BO
 
         #region constructeur
 
-        public Historique(Client cli, int sum, int newSold)
+        public Historique(Client cli, double sum, double newSold)
         {
             client = cli;
             transactionSum = sum;
             soldAfterTransaction = newSold;
         }
 
-        public Historique(Client cli, int sum, int newSold, DateTime transacDate) 
+        public Historique(Client cli, double sum, double newSold, DateTime transacDate) 
         {
             client = cli;
             transactionSum = sum;

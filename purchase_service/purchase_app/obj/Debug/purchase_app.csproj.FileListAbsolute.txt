@@ -19,3 +19,4 @@ C:\Users\Dell\Desktop\Git2\purchase_service\purchase_service\purchase_app\bin\pu
 C:\Users\Dell\Desktop\Git2\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.csprojResolveAssemblyReference.cache
 C:\Users\Dell\Desktop\Git2\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.dll
 C:\Users\Dell\Desktop\Git2\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.pdb
+C:\Users\Kylroil\Documents\M2\SOA\purchase_service\purchase_service\purchase_app\obj\Debug\purchase_app.csprojResolveAssemblyReference.cache

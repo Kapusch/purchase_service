@@ -21,7 +21,7 @@ namespace purchase_service.BO
 
         private DateTime inscriptionDate;
 
-        private int sold;
+        private double sold;
 
         private bool isDelete;
 
@@ -41,7 +41,7 @@ namespace purchase_service.BO
 
         public DateTime InscriptionDate { get { return inscriptionDate; } }
 
-        public int Sold { get { return sold; } }
+        public double Sold { get { return sold; } }
 
         public bool IsDelete { get { return isDelete; } set { isDelete = value; } }
 
@@ -50,7 +50,7 @@ namespace purchase_service.BO
         #region constructeur
 
         public Client(int id, string login, string passwordC, string nameClient, string firstname
-                        , DateTime inscripDate, int soldC, bool isDeleteC)
+                        , DateTime inscripDate, double soldC, bool isDeleteC)
         {
             clientId = id;
             clientLogin = login;
@@ -63,7 +63,7 @@ namespace purchase_service.BO
         }
 
         public Client(string login, string passwordC, string nameClient, string firstname
-                        , DateTime inscripDate, int soldC, bool isDeleteC)
+                        , DateTime inscripDate, double soldC, bool isDeleteC)
         {
             clientLogin = login;
             password = passwordC;
@@ -87,14 +87,16 @@ namespace purchase_service.BO
                 return false;
         }
 
-        public void DoPurchase (int price)
+        public void DoPurchase (double price)
         {
-            this.sold = this.sold - price;
+            decimal result = Convert.ToDecimal(this.sold) - Convert.ToDecimal(price);
+            this.sold = Convert.ToDouble(result);
         }
 
-        public void DoCredit(int amount)
+        public void DoCredit(double amount)
         {
-            this.sold = this.sold + amount;
+            decimal result = Convert.ToDecimal(this.sold) + Convert.ToDecimal(amount);
+            this.sold = Convert.ToDouble(result);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Magasin.BO
 
         public DateTime inscriptionDate;
 
-        public int sold;
+        public double sold;
 
         public PurchaseService.ArrayOfString result;
 
@@ -29,7 +29,7 @@ namespace Magasin.BO
         public Client(int idClient)
         {
             this.clientId = idClient;
-            result = Service.GetService.GetClient(idClient);
+            result = Service.GetPaymentService.GetClient(idClient);
         }
 
         public void FillClient (PurchaseService.ArrayOfString info)
@@ -39,14 +39,14 @@ namespace Magasin.BO
             name = info[2];
             firstName = info[3];
             inscriptionDate = DateTime.Parse(info[4]);
-            sold=Int32.Parse(info[5]);
+            sold=Convert.ToDouble(info[5]);
         }
 
         public List<CartesBancaire> GetCartes()
         {
             try
             {
-                var result = Service.GetService.GetCarteBancaire(this.clientId).ToList();
+                var result = Service.GetPaymentService.GetCarteBancaire(this.clientId).ToList();
 
                 if (result.Count != 0 && result[0].Count<2)
                     using (var info = new InformationBox(result[0][0]))

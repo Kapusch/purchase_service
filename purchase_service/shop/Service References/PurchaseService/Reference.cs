@@ -509,12 +509,12 @@ namespace Magasin.PurchaseService {
         public string firstNameClient;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public int soldClient;
+        public double soldClient;
         
         public NewUserRequestBody() {
         }
         
-        public NewUserRequestBody(string login, string pwdClient, string nameClient, string firstNameClient, int soldClient) {
+        public NewUserRequestBody(string login, string pwdClient, string nameClient, string firstNameClient, double soldClient) {
             this.login = login;
             this.pwdClient = pwdClient;
             this.nameClient = nameClient;
@@ -736,12 +736,12 @@ namespace Magasin.PurchaseService {
         public int idClient;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public int amount;
+        public double amount;
         
         public DebitTransactionRequestBody() {
         }
         
-        public DebitTransactionRequestBody(int idClient, int amount) {
+        public DebitTransactionRequestBody(int idClient, double amount) {
             this.idClient = idClient;
             this.amount = amount;
         }
@@ -808,12 +808,12 @@ namespace Magasin.PurchaseService {
         public int idClient;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public int amount;
+        public double amount;
         
         public CreditTransactionRequestBody() {
         }
         
-        public CreditTransactionRequestBody(int idClient, int amount) {
+        public CreditTransactionRequestBody(int idClient, double amount) {
             this.idClient = idClient;
             this.amount = amount;
         }
@@ -1743,7 +1743,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.NewUser(request);
         }
         
-        public string NewUser(string login, string pwdClient, string nameClient, string firstNameClient, int soldClient) {
+        public string NewUser(string login, string pwdClient, string nameClient, string firstNameClient, double soldClient) {
             Magasin.PurchaseService.NewUserRequest inValue = new Magasin.PurchaseService.NewUserRequest();
             inValue.Body = new Magasin.PurchaseService.NewUserRequestBody();
             inValue.Body.login = login;
@@ -1760,7 +1760,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.NewUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Magasin.PurchaseService.NewUserResponse> NewUserAsync(string login, string pwdClient, string nameClient, string firstNameClient, int soldClient) {
+        public System.Threading.Tasks.Task<Magasin.PurchaseService.NewUserResponse> NewUserAsync(string login, string pwdClient, string nameClient, string firstNameClient, double soldClient) {
             Magasin.PurchaseService.NewUserRequest inValue = new Magasin.PurchaseService.NewUserRequest();
             inValue.Body = new Magasin.PurchaseService.NewUserRequestBody();
             inValue.Body.login = login;
@@ -1834,7 +1834,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.DebitTransaction(request);
         }
         
-        public string DebitTransaction(int idClient, int amount) {
+        public string DebitTransaction(int idClient, double amount) {
             Magasin.PurchaseService.DebitTransactionRequest inValue = new Magasin.PurchaseService.DebitTransactionRequest();
             inValue.Body = new Magasin.PurchaseService.DebitTransactionRequestBody();
             inValue.Body.idClient = idClient;
@@ -1848,7 +1848,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.DebitTransactionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Magasin.PurchaseService.DebitTransactionResponse> DebitTransactionAsync(int idClient, int amount) {
+        public System.Threading.Tasks.Task<Magasin.PurchaseService.DebitTransactionResponse> DebitTransactionAsync(int idClient, double amount) {
             Magasin.PurchaseService.DebitTransactionRequest inValue = new Magasin.PurchaseService.DebitTransactionRequest();
             inValue.Body = new Magasin.PurchaseService.DebitTransactionRequestBody();
             inValue.Body.idClient = idClient;
@@ -1861,7 +1861,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.CreditTransaction(request);
         }
         
-        public string CreditTransaction(int idClient, int amount) {
+        public string CreditTransaction(int idClient, double amount) {
             Magasin.PurchaseService.CreditTransactionRequest inValue = new Magasin.PurchaseService.CreditTransactionRequest();
             inValue.Body = new Magasin.PurchaseService.CreditTransactionRequestBody();
             inValue.Body.idClient = idClient;
@@ -1875,7 +1875,7 @@ namespace Magasin.PurchaseService {
             return base.Channel.CreditTransactionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Magasin.PurchaseService.CreditTransactionResponse> CreditTransactionAsync(int idClient, int amount) {
+        public System.Threading.Tasks.Task<Magasin.PurchaseService.CreditTransactionResponse> CreditTransactionAsync(int idClient, double amount) {
             Magasin.PurchaseService.CreditTransactionRequest inValue = new Magasin.PurchaseService.CreditTransactionRequest();
             inValue.Body = new Magasin.PurchaseService.CreditTransactionRequestBody();
             inValue.Body.idClient = idClient;
